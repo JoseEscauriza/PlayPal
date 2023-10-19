@@ -1,0 +1,6 @@
+-r base.txt
+
+ipython==8.14.0
+psycopg2==2.9.7
+python-environ==0.4.54
+pillow==10.0.0
