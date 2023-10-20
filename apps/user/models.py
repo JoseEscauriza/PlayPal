@@ -54,7 +54,7 @@ class UserPhoto(models.Model):
 
 class GenderInterest(models.Model):
     id = models.AutoField(primary_key=True)
-    user_account_id = models.OneToOneRel(CustomUser, on_delete=models.CASCADE)  # one-to-one
+    user_account_id = models.OneToOneField(CustomUser, on_delete=models.CASCADE)  # one-to-one
     gender_id = models.CharField(max_length=255, choices=[(tag, tag.value) for tag in GenderEnum])
 
 
