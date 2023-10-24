@@ -100,4 +100,3 @@ class Child(models.Model):
 
 
 # TODO: Create separate CREATED_AT / MODIFIED_AT to be inherited from
-# TODO: Check location django field options
