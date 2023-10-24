@@ -113,6 +113,3 @@ class Child(TimeRegistryBaseModel):
     interest_id = models.ManyToManyField(
         'Interest', related_name='child_interests')
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-
-
-# TODO: Create separate CREATED_AT / MODIFIED_AT to be inherited from
