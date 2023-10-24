@@ -1,9 +1,8 @@
 import uuid
 
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, Group
 from django.db import models
 from django.utils import timezone
-from enum import Enum
 
 
 class MaritalStatus(models.Model):
@@ -30,35 +29,39 @@ class Interest(models.Model):
 class UserPreferences(models.Model):
     id = models.AutoField(primary_key=True)
     parent_age = models.IntegerField()
-    parent_gender = models.ForeignKey("Gender", on_delete=models.CASCADE)
+    parent_gender = models.ForeignKey("Gender", on_delete=models.CASCADE, related_name="parent_gender")
     marital_id = models.ManyToManyField("MaritalStatus", related_name="parent_marital_preference")
     child_age = models.IntegerField()
     child_gender = models.ForeignKey("Gender", on_delete=models.CASCADE)
-    child_interest = models.ManyToManyField("Interest", related_name="child_interests")
+    child_interest = models.ManyToManyField("Interest", related_name="child_interest")
 
 
-class UserRatingEnum(Enum):
+class UserRatingEnum(models.Model):
     pass
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
-    # password = models.CharField(max_length=128)
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
-    gender_id = models.IntegerField()
+    gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
     verified_status = models.BooleanField(default=False)
     date_joined = models.DateField(default=timezone.now)
     bio = models.TextField()
     location = models.CharField(max_length=100)
     birthdate = models.DateField()
-    marital_id = models.IntegerField()
-    preferences_id = models.IntegerField()
+    marital_status = models.ForeignKey(MaritalStatus, on_delete=models.CASCADE)
+    preferences_id = models.ForeignKey(UserPreferences, on_delete=models.CASCADE)
     staff_status = models.BooleanField(default=False)
     active_status = models.BooleanField(default=True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)  # saves single avatar
-    # groups = models.TextField()
+    groups = models.ManyToManyField(
+        Group,
+        blank=True,
+        related_name='custom_users',
+        related_query_name='custom_user_groups'
+    )
     user_permissions = models.ManyToManyField(
         'auth.Permission',
         blank=True,
@@ -70,7 +73,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name', 'gender_id']  # required when creating
 
     def __str__(self):
-        return self.username
+        return self.first_name
 
 
 class UserPhoto(models.Model):
@@ -83,7 +86,7 @@ class Grade(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_id_given = models.ManyToManyField('CustomUser', related_name='grades_given')
     user_id_received = models.ManyToManyField('CustomUser', related_name='grades_received')
-    grade = models.CharField(max_length=255, choices=[(rating, rating.value) for rating in UserRatingEnum])  # CHECK
+    grade = models.ForeignKey(UserRatingEnum, on_delete=models.CASCADE)  # CHECK
 
 
 class Child(models.Model):
