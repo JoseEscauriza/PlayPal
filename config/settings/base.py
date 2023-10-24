@@ -31,7 +31,6 @@ DEFAULT_APPS = [
 ]
 
 CUSTOM_APPS = [
-    "apps.core",
     "apps.user",
     "apps.chat",
     "apps.marketplace"
