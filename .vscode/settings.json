@@ -1,0 +1,8 @@
+{
+    "pylint.path": [
+        "/home/jose/Desktop/PlayPal/"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/jose/Desktop/PlayPal/"
+    ]
+}
