@@ -5,12 +5,16 @@ from django.contrib.auth.admin import UserAdmin
 
 
 class CustomUserCreationForm(UserCreationForm):
+    """ Redefines base UserCreationForm with CustomUser fields (no username)"""
+
     class Meta:
         model = CustomUser
         fields = ("email", "first_name", "last_name", "bio", "location", "birthdate", "avatar")
 
 
 class CustomUserChangeForm(UserChangeForm):
+    """ Redefines base UserCreationForm with CustomUser fields"""
+
     class Meta:
         model = CustomUser
         fields = ("email", "first_name", "last_name", "bio", "location", "birthdate", "marital_status", "preferences_id", "avatar", "gender", "marital_status")
@@ -23,16 +27,16 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         ("Personal info", {"fields": ("first_name", "last_name", "bio", "location", "birthdate", "avatar", "gender")}),
-    )
+    )  # fields grouped in editing form
 
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
             "fields": ("email", "password1", "password2"),
-        }),
+        }),  # fields displayed when adding a new user
     )
-    list_display = ('email', 'first_name', 'last_name', 'is_staff')  # Fields to display.
 
+    list_display = ('email', 'first_name', 'last_name', 'is_staff')  # Fields to display in admin users list
 
     ordering = ("email",)
 

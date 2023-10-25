@@ -27,6 +27,10 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
+class UserRatingEnum(models.Model):
+    pass
+
+
 class MaritalStatus(models.Model):
     id = models.AutoField(primary_key=True)
     marital_status = models.CharField(max_length=30)
@@ -69,6 +73,9 @@ class Interest(models.Model):
 
 class UserPreference(models.Model):
     id = models.AutoField(primary_key=True)
+    # parent_user = models.ForeignKey(
+    #     "user.CustomUser", on_delete=models.CASCADE, related_name="preferences")
+    # TODO: reference to parent user, and return __str__
     parent_lower_age_range = models.IntegerField()
     parent_upper_age_range = models.IntegerField()
     parent_gender = models.ManyToManyField(
@@ -83,11 +90,7 @@ class UserPreference(models.Model):
         "Interest", related_name="child_interest")
 
     def __str__(self) -> str:
-        return self.id
-
-
-class UserRatingEnum(models.Model):
-    pass
+        return "ID: {self.id}"
 
 
 class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
@@ -104,22 +107,28 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     preferences_id = models.ForeignKey(
         UserPreference, on_delete=models.CASCADE, null=True)
     avatar = models.ImageField(
-        upload_to="avatars/", null=True, blank=True)  # saves single avatar
+        upload_to="avatars/", null=True, blank=True)  # TODO: check avatar saving process
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name", "last_name"]  # required when creating
+    REQUIRED_FIELDS = []  # TODO: think thoroughly what we actually-required when creating a user
 
     def __str__(self):
         return self.email
+
+    def has_perm(self, perm, obj=None):
+        """ Does the user have a specific permission? """
+        return True
+
+    def __str__(self) -> str:
+        return f"Preference id: {self.id}"
 
 
 class UserPhoto(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_id = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE)  # one-to-many
-    # multiple photos for the user
+        CustomUser, on_delete=models.CASCADE)
     photos = models.ImageField(upload_to="user_photos/", null=True, blank=True)
 
 
