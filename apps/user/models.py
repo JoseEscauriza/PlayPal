@@ -5,6 +5,7 @@ from django.db import models
 from django.utils import timezone
 
 
+
 class MaritalStatus(models.Model):
     id = models.AutoField(primary_key=True)
     marital_status_name = models.CharField(max_length=30)
@@ -47,10 +48,8 @@ class UserRatingEnum(models.Model):
 class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     uuid = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
-    username = None
+    username = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
     verified_status = models.BooleanField(default=False)
     # date_joined = models.DateField(default=timezone.now)
@@ -60,29 +59,14 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     marital_status = models.ForeignKey(MaritalStatus, on_delete=models.CASCADE)
     preferences_id = models.ForeignKey(
         UserPreferences, on_delete=models.CASCADE)
-    staff_status = models.BooleanField(default=False)
-    active_status = models.BooleanField(default=True)
     avatar = models.ImageField(
         upload_to='avatars/', null=True, blank=True)  # saves single avatar
-    groups = models.ManyToManyField(
-        Group,
-        blank=True,
-        related_name='custom_users',
-        related_query_name='custom_user_groups'
-    )
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        blank=True,
-        related_name='customuser_set',
-        related_query_name='customuser'
-    )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['email', 'first_name', 'last_name',
-                       'gender_id']  # required when creating
+    REQUIRED_FIELDS = ['first_name', 'last_name']  # required when creating
 
     def __str__(self):
-        return self.first_name
+        return self.uuid
 
 
 class UserPhoto(models.Model):
