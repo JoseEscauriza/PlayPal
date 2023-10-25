@@ -90,7 +90,7 @@ class UserPreference(models.Model):
         "Interest", related_name="child_interest")
 
     def __str__(self) -> str:
-        return "ID: {self.id}"
+        return f"ID: {self.id}"
 
 
 class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
@@ -120,9 +120,6 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     def has_perm(self, perm, obj=None):
         """ Does the user have a specific permission? """
         return True
-
-    def __str__(self) -> str:
-        return f"Preference id: {self.id}"
 
 
 class UserPhoto(models.Model):
