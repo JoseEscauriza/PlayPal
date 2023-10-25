@@ -3,7 +3,6 @@ from apps.core.models import TimeRegistryBaseModel
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, Group
 from django.db import models
-from django.utils import timezone
 
 
 class CustomUserManager(BaseUserManager):
@@ -30,17 +29,32 @@ class CustomUserManager(BaseUserManager):
 
 class MaritalStatus(models.Model):
     id = models.AutoField(primary_key=True)
-    marital_status_name = models.CharField(max_length=30)
+    marital_status = models.CharField(max_length=30)
+
+    class Meta:
+        verbose_name_plural = "Marital statuses"
+
+    def __str__(self) -> str:
+        return self.marital_status
 
 
 class Gender(models.Model):
     id = models.AutoField(primary_key=True)
     gender_name = models.CharField(max_length=10)
 
+    def __str__(self) -> str:
+        return self.gender_name
+
 
 class InterestCategory(models.Model):
     id = models.AutoField(primary_key=True)
     category_name = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = "Interest categories"
+
+    def __str__(self) -> str:
+        return self.category_name
 
 
 class Interest(models.Model):
@@ -49,18 +63,27 @@ class Interest(models.Model):
         "InterestCategory", on_delete=models.CASCADE)
     interest_name = models.CharField(max_length=50)
 
+    def __str__(self) -> str:
+        return self.interest_name
 
-class UserPreferences(models.Model):
+
+class UserPreference(models.Model):
     id = models.AutoField(primary_key=True)
-    parent_age = models.IntegerField()
-    parent_gender = models.ForeignKey(
-        "Gender", on_delete=models.CASCADE, related_name="parent_gender")
+    parent_lower_age_range = models.IntegerField()
+    parent_upper_age_range = models.IntegerField()
+    parent_gender = models.ManyToManyField(
+        "user.Gender", related_name="parent_gender_preference")
     marital_id = models.ManyToManyField(
         "MaritalStatus", related_name="parent_marital_preference")
-    child_age = models.IntegerField()
-    child_gender = models.ForeignKey("Gender", on_delete=models.CASCADE)
+    child_lower_age_range = models.IntegerField()
+    child_upper_age_range = models.IntegerField()
+    child_gender = models.ManyToManyField(
+        "Gender", related_name="child_gender_preference")
     child_interest = models.ManyToManyField(
         "Interest", related_name="child_interest")
+
+    def __str__(self) -> str:
+        return self.id
 
 
 class UserRatingEnum(models.Model):
@@ -79,7 +102,7 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     birthdate = models.DateField(null=True, blank=True)
     marital_status = models.ForeignKey(MaritalStatus, on_delete=models.CASCADE, null=True, blank=True)
     preferences_id = models.ForeignKey(
-        UserPreferences, on_delete=models.CASCADE, null=True)
+        UserPreference, on_delete=models.CASCADE, null=True)
     avatar = models.ImageField(
         upload_to="avatars/", null=True, blank=True)  # saves single avatar
 
