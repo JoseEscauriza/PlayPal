@@ -48,3 +48,4 @@ class TestInterestModel(TestCase):
         interest = Interest.objects.create(category_id=category, interest_name="photography")
         self.assertEqual(str(interest), "photography")
 
+
