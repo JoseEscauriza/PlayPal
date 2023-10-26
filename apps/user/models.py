@@ -1,5 +1,6 @@
 import uuid
 from apps.core.models import TimeRegistryBaseModel
+from apps.user import validators
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, Group
 from django.db import models
@@ -25,10 +26,6 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("Superuser must have is_superuser=True.")
 
         return self.create_user(email, password, **extra_fields)
-
-
-class UserRatingEnum(models.Model):
-    pass
 
 
 class MaritalStatus(models.Model):
@@ -73,9 +70,8 @@ class Interest(models.Model):
 
 class UserPreference(models.Model):
     id = models.AutoField(primary_key=True)
-    # parent_user = models.ForeignKey(
-    #     "user.CustomUser", on_delete=models.CASCADE, related_name="preferences")
-    # TODO: reference to parent user, and return __str__
+    user_id = models.OneToOneField(
+        "CustomUser", on_delete=models.CASCADE, related_name="preferences")
     parent_lower_age_range = models.IntegerField()
     parent_upper_age_range = models.IntegerField()
     parent_gender = models.ManyToManyField(
@@ -104,8 +100,6 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     location = models.CharField(max_length=10, null=True, blank=True)
     birthdate = models.DateField(null=True, blank=True)
     marital_status = models.ForeignKey(MaritalStatus, on_delete=models.CASCADE, null=True, blank=True)
-    preferences_id = models.ForeignKey(
-        UserPreference, on_delete=models.CASCADE, null=True)
     avatar = models.ImageField(
         upload_to="avatars/", null=True, blank=True)  # TODO: check avatar saving process
 
@@ -135,8 +129,7 @@ class Grade(TimeRegistryBaseModel):
         "CustomUser", related_name="grades_given")
     user_id_received = models.ManyToManyField(
         "CustomUser", related_name="grades_received")
-    grade = models.ForeignKey(
-        UserRatingEnum, on_delete=models.CASCADE)  # CHECK
+    grade = models.IntegerField(validators=[validators.check_rating_range])
 
 
 class Child(TimeRegistryBaseModel):
@@ -149,3 +142,6 @@ class Child(TimeRegistryBaseModel):
     interest_id = models.ManyToManyField(
         "Interest", related_name="child_interests")
     avatar = models.ImageField(upload_to="avatars/", null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = "Children"

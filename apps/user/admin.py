@@ -17,7 +17,7 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ("email", "first_name", "last_name", "bio", "location", "birthdate", "marital_status", "preferences_id", "avatar", "gender", "marital_status")
+        fields = ("email", "first_name", "last_name", "bio", "location", "birthdate", "marital_status", "avatar", "gender", "marital_status")
 
 
 class CustomUserAdmin(UserAdmin):
@@ -87,8 +87,51 @@ class CustomUserPreference(admin.ModelAdmin):
     def get_childs_interests(self, obj):
         return ", ".join([obj.interest_name for obj in obj.child_interest.all()])
 
-    # TODO: CREATE METHODS FOR MANY TO MANY FIELDS AND CONTINUE TESTING RELATIONS ONE BY ONE
 
+class CustomUserPhoto(admin.ModelAdmin):
+    
+    list_display = [
+        "id",
+        "get_user",
+    ]
+
+    @admin.display(description="Uploaded by")
+    def get_user(self, obj):
+        return obj.user_id.email
+    
+class CustomGrade(admin.ModelAdmin):
+    
+    list_display = [
+        "id",
+        "get_user_given",
+        "get_user_received",
+        "grade"
+    ]
+    
+    @admin.display(description="Rating User")
+    def get_user_given(self, obj):
+        return obj.user_id_given.email
+
+    @admin.display(description="Receiving User")
+    def get_user_received(self, obj):
+        return obj.user_id_received.email
+    
+class CustomChild(admin.ModelAdmin):
+    
+    list_display = [
+        "id",
+        "get_parent",
+        "birthdate",
+        "get_gender",
+    ]
+
+    @admin.display(description="Parent User")
+    def get_parent(self, obj):
+        return obj.parent_id.email
+
+    @admin.display(description="Gender")
+    def get_gender(self, obj):
+        return obj.gender_id.gender_name
 
 # Register your models here.
 admin.site.register(MaritalStatus)
@@ -97,3 +140,6 @@ admin.site.register(InterestCategory)
 admin.site.register(Interest, CustomInterest)
 admin.site.register(UserPreference, CustomUserPreference)
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(UserPhoto, CustomUserPhoto)
+admin.site.register(Grade, CustomGrade)
+admin.site.register(Child, CustomChild)
