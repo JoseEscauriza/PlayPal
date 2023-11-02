@@ -98,7 +98,8 @@ class CustomUserPhoto(admin.ModelAdmin):
     @admin.display(description="Uploaded by")
     def get_user(self, obj):
         return obj.user_id.email
-    
+
+
 class CustomGrade(admin.ModelAdmin):
     
     list_display = [
@@ -115,7 +116,8 @@ class CustomGrade(admin.ModelAdmin):
     @admin.display(description="Receiving User")
     def get_user_received(self, obj):
         return obj.user_id_received.email
-    
+
+
 class CustomChild(admin.ModelAdmin):
     
     list_display = [
@@ -132,6 +134,7 @@ class CustomChild(admin.ModelAdmin):
     @admin.display(description="Gender")
     def get_gender(self, obj):
         return obj.gender_id.gender_name
+
 
 # Register your models here.
 admin.site.register(MaritalStatus)
