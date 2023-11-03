@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<section class="vh-200">
+<section class="vh-200 my-5">
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
@@ -32,6 +32,13 @@
               placeholder="Enter password" name="password" />
             <label class="form-label" for="form3Example4">Password</label>
           </div>
+
+        <!-- Display Error Message  -->
+            {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+              {{ error_message }}
+            </div>
+            {% endif %}
 
           <div class="d-flex justify-content-between align-items-center">
             <!-- Checkbox -->
