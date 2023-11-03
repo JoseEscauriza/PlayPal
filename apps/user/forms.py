@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext as _
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 
 from .models import CustomUser
 
@@ -41,3 +41,14 @@ class CustomUserChangeForm(UserChangeForm):
             "avatar",
             "gender",
             "marital_status")
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    email = forms.EmailField(
+        label='Email',
+        widget=forms.TextInput(attrs={'autofocus': True}),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(CustomAuthenticationForm, self).__init__(*args, **kwargs)
+        del self.fields['username']
