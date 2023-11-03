@@ -7,33 +7,27 @@ from django.contrib.auth import authenticate, login
 from .models import CustomUser
 from .forms import CustomAuthenticationForm
 
-# Create your views here.
-
 
 def login_view(request):
     error_message = None
-    # Unbound form
     form = CustomAuthenticationForm()
-    # Bound form
+
     if request.method == 'POST':
         form = CustomAuthenticationForm(data=request.POST)
-        # Validate
+
         if form.is_valid():
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password')
-            print(email, password)
 
-            # Authenticate the user
             user: Optional[CustomUser] = authenticate(
                 request,
                 email=email,
                 password=password,
             )
-            print(user)
 
             if user is not None:
                 login(request, user)
-                return redirect('logged_view')  # TODO: redirect
+                return redirect('logged_view')
             else:
                 error_message = 'Incorrect email or password. Please try again.'
 
