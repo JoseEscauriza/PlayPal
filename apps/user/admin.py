@@ -1,23 +1,8 @@
 from django.contrib import admin
-from .models import *
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.admin import UserAdmin
 
-
-class CustomUserCreationForm(UserCreationForm):
-    """ Redefines base UserCreationForm with CustomUser fields (no username)"""
-
-    class Meta:
-        model = CustomUser
-        fields = ("email", "first_name", "last_name", "bio", "location", "birthdate", "avatar")
-
-
-class CustomUserChangeForm(UserChangeForm):
-    """ Redefines base UserCreationForm with CustomUser fields"""
-
-    class Meta:
-        model = CustomUser
-        fields = ("email", "first_name", "last_name", "bio", "location", "birthdate", "marital_status", "avatar", "gender", "marital_status")
+from .models import *
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
 class CustomUserAdmin(UserAdmin):
