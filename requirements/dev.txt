@@ -5,3 +5,4 @@ psycopg2==2.9.7
 python-environ==0.4.54
 pillow==10.0.0
 mypy==1.6.1
+django-stubs==1.2.0
