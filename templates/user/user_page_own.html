@@ -9,6 +9,13 @@
 {% block content %}
 
 <section style="background-color: #eee;">
+   <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <div class="text-right text-lg-start mt-4 pt-2" >
+            <button  id="logout-button" type="submit" class="btn btn-primary btn-lg">Logout</button>
+          </div>
+      </form>
+
   <div class="container py-5">
 
     <div class="row">

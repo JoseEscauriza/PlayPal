@@ -38,7 +38,7 @@ def login_view(request):
 
 @login_required
 def logged_view(request):
-    return render(request, "user/logged_user.html")
+    return redirect(user_profile_own)
 
 
 @login_required
@@ -65,4 +65,5 @@ def user_profile_own(request):
     return render(request, "user/user_page_own.html", context)
 
 
+# TODO:user_profile_own edit profile, change profile picture functs
 # TODO: make default smth for pages wher user must be logged-in, otherwise /profile page fails
