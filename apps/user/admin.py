@@ -1,23 +1,8 @@
 from django.contrib import admin
-from .models import *
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.admin import UserAdmin
 
-
-class CustomUserCreationForm(UserCreationForm):
-    """ Redefines base UserCreationForm with CustomUser fields (no username)"""
-
-    class Meta:
-        model = CustomUser
-        fields = ("email", "first_name", "last_name", "bio", "location", "birthdate", "avatar")
-
-
-class CustomUserChangeForm(UserChangeForm):
-    """ Redefines base UserCreationForm with CustomUser fields"""
-
-    class Meta:
-        model = CustomUser
-        fields = ("email", "first_name", "last_name", "bio", "location", "birthdate", "marital_status", "avatar", "gender", "marital_status")
+from .models import *
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
 class CustomUserAdmin(UserAdmin):
@@ -98,7 +83,8 @@ class CustomUserPhoto(admin.ModelAdmin):
     @admin.display(description="Uploaded by")
     def get_user(self, obj):
         return obj.user_id.email
-    
+
+
 class CustomGrade(admin.ModelAdmin):
     
     list_display = [
@@ -115,7 +101,8 @@ class CustomGrade(admin.ModelAdmin):
     @admin.display(description="Receiving User")
     def get_user_received(self, obj):
         return obj.user_id_received.email
-    
+
+
 class CustomChild(admin.ModelAdmin):
     
     list_display = [
@@ -132,6 +119,7 @@ class CustomChild(admin.ModelAdmin):
     @admin.display(description="Gender")
     def get_gender(self, obj):
         return obj.gender_id.gender_name
+
 
 # Register your models here.
 admin.site.register(MaritalStatus)

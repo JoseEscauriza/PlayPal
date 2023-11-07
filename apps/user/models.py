@@ -1,13 +1,17 @@
 import uuid
-from apps.core.models import TimeRegistryBaseModel
-from apps.user import validators
-from django.contrib.auth.models import BaseUserManager
-from django.contrib.auth.models import AbstractUser, PermissionsMixin, Group
+from typing import List
+
 from django.db import models
+from apps.core.models import TimeRegistryBaseModel
+from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth.models import User
+
+from apps.user import validators
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email: str, password=None, **extra_fields) -> User:
         if not email:
             raise ValueError("The Email field must be set")
         email = self.normalize_email(email)
@@ -16,7 +20,7 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password=None, **extra_fields):
+    def create_superuser(self, email: str, password=None, **extra_fields) -> User:
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
@@ -101,17 +105,17 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     birthdate = models.DateField(null=True, blank=True)
     marital_status = models.ForeignKey(MaritalStatus, on_delete=models.CASCADE, null=True, blank=True)
     avatar = models.ImageField(
-        upload_to="avatars/", null=True, blank=True)  # TODO: check avatar saving process
+        upload_to="avatars/", null=True, blank=True)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []  # TODO: think thoroughly what we actually-required when creating a user
+    REQUIRED_FIELDS: List[str] = []  # TODO: think thoroughly what we actually-required when creating a user
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.email
 
-    def has_perm(self, perm, obj=None):
+    def has_perm(self, perm, obj=None) -> bool:
         """ Does the user have a specific permission? """
         return True
 
