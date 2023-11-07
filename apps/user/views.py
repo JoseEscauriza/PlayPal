@@ -2,7 +2,7 @@ from typing import Optional
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from .models import CustomUser
 from .forms import CustomAuthenticationForm
@@ -39,3 +39,10 @@ def login_view(request):
 @login_required
 def logged_view(request):
     return render(request, "user/logged_user.html")
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('home_page')
+
