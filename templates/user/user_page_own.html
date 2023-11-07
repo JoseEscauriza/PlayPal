@@ -15,6 +15,7 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
+            <!-- if avatar is return it gets it, when not it shows predefined image src -->
             <img src="{% if avatar %}{{ avatar }}{% else %}https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp{% endif %}"
                  alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
 
@@ -97,6 +98,24 @@
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{ location|default:'Your city' }} </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Marital status</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ marital_status|default:'Your status' }} </p>
+              </div>
+            </div>
+             <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Gender</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ gender|default:'Your gender' }} </p>
               </div>
             </div>
 

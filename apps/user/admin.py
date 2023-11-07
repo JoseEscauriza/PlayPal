@@ -11,7 +11,18 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        ("Personal info", {"fields": ("first_name", "last_name", "bio", "location", "birthdate", "avatar", "gender")}),
+        ("Personal info", {"fields": (
+            "first_name",
+            "last_name",
+            "bio",
+            "location",
+            "birthdate",
+            "avatar",
+            "gender",
+            "marital_status"
+        )
+        }
+         ),
     )  # fields grouped in editing form
 
     add_fieldsets = (
