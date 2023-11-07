@@ -63,3 +63,6 @@ def user_profile_own(request):
         "avatar": user.avatar.url if user.avatar else None,
     }
     return render(request, "user/user_page_own.html", context)
+
+
+# TODO: make default smth for pages wher user must be logged-in, otherwise /profile page fails
