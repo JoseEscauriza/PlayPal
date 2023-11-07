@@ -101,7 +101,7 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE, null=True, blank=True)
     verified_status = models.BooleanField(default=False)
     bio = models.TextField(null=True, blank=True)
-    location = models.CharField(max_length=10, null=True, blank=True)
+    location = models.CharField(max_length=50, null=True, blank=True)
     birthdate = models.DateField(null=True, blank=True)
     marital_status = models.ForeignKey(MaritalStatus, on_delete=models.CASCADE, null=True, blank=True)
     avatar = models.ImageField(
