@@ -151,6 +151,9 @@ class Child(TimeRegistryBaseModel):
     class Meta:
         verbose_name_plural = "Children"
 
+    def __str__(self) -> str:
+        return self.first_name
+
 
 class ChildPicture(models.Model):
     child = models.ForeignKey(Child, on_delete=models.CASCADE, related_name='pictures')
