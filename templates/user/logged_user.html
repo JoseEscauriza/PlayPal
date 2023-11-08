@@ -8,7 +8,16 @@
 
 {% block content %}
 
-<h3>You are logged in successfully!</h3>
+<h3 class="text-center mt-4" >You are logged in successfully!</h3>
+
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <div class="text-center text-lg-start mt-4 pt-2">
+            <button  id="logout-button" type="submit" class="btn btn-primary btn-lg">Logout</button>
+
+          </div>
+
+</form>
 
 {% endblock content %}
 
