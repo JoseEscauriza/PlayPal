@@ -1,4 +1,5 @@
 from typing import Optional
+from datetime import date, datetime, timedelta
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -49,7 +50,23 @@ def user_logout(request):
 
 @login_required
 def user_profile_own(request):
+    children_data = []
+
     user = request.user
+
+    # Loop through the children
+    for child in user.child_set.all():
+        child_data = {
+            "name": child.first_name,
+            "gender": child.gender_id.gender_name,
+            "age": (date.today() - child.birthdate).days // 365,
+            "avatar": child.avatar.url if child.avatar else None,
+            "interests": [interest.interest_name for interest in child.interest_id.all()],
+            "child_images": [picture.picture.url for picture in child.pictures.all()],
+        }
+
+        children_data.append(child_data)
+
     context = {
         "email": user.email,
         "first_name": user.first_name,
@@ -61,9 +78,13 @@ def user_profile_own(request):
         "birthdate": user.birthdate,
         "marital_status": user.marital_status,
         "avatar": user.avatar.url if user.avatar else None,
+        "children_data": children_data
     }
     return render(request, "user/user_page_own.html", context)
 
 
-# TODO:user_profile_own edit profile, change profile picture functs
-# TODO: make default smth for pages wher user must be logged-in, otherwise /profile page fails
+# TODO:check staticfiles folder before push - play with static filed branch
+# TODO: add child section slider of pics on card
+# TODO:add to user_profile_own: edit profile, change profile picture
+# TODO: make default look for smth for pages when user must be logged-in, otherwise /profile page fails
+

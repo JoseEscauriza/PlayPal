@@ -35,6 +35,8 @@
             </div>
           </div>
         </div>
+
+        <!-- Some infotags  section -->
         <div class="card mb-4 mb-lg-0">
           <div class="card-body p-0">
             <ul class="list-group list-group-flush rounded-3">
@@ -58,6 +60,8 @@
             </ul>
           </div>
         </div>
+
+        <!-- My profile data section -->
       </div>
       <div class="col-lg-8">
         <div class="card mb-4">
@@ -88,16 +92,6 @@
                 <p class="text-muted mb-0">{{ email|default:'Your email' }}</p>
               </div>
             </div>
-            <!-- Mobile phone
-<!--            <hr>-->
-<!--            <div class="row">-->
-<!--              <div class="col-sm-3">-->
-<!--                <p class="mb-0">Mobile</p>-->
-<!--              </div>-->
-<!--              <div class="col-sm-9">-->
-<!--                <p class="text-muted mb-0">Your phone number</p>-->
-<!--              </div>-->
-<!--            </div>-->
             <hr>
             <div class="row">
               <div class="col-sm-3">
@@ -135,14 +129,84 @@
                 <textarea class="form-control" rows="4" placeholder="Enter your bio here">{{bio}}</textarea>
               </div>
             </div>
-
-
           </div>
+        </div>
+
+        <!-- My children section -->
+         <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">My children</h5>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0"> Name</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ first_name|default:'Your first name' }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Age</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ last_name|default:'Your last name' }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Gender</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ first_name|default:'Your first name' }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Interests</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ last_name|default:'Your last name' }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Bio</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ last_name|default:'Your last name' }}</p>
+              </div>
+            </div>
+            <hr>
+
+            <!-- Child pictures-->
+
+            <div class="container">
+                <div class="row">
+                    {% for image in child_images %}
+                        <div class="col-md-3">
+                            <div class="card card-square">
+                                <img src="{{ image.picture.url }}" class="card-img-top rounded" alt="{{ image.picture.name }}">
+                                <div class="card-body">
+                                    <!-- Any additional information related to the image -->
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
 
         </div>
+      </div>
+
+         <!-- My preferences section -->
         <div class="row">
           <div class="col-md-10">
-
             <div class="row">
               <div class="col-sm-6 mb-3 mb-sm-0">
                 <div class="card">
@@ -156,20 +220,6 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Add child</h5>
-                    <p class="card-text">Add info about your child</p>
-                    <a href="#" class="btn btn-primary">Edit</a>
-                  </div>
-                </div>
-              </div>
-              </div>
-
-
-        </div>
-      </div>
     </div>
   </div>
 </section>
