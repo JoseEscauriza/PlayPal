@@ -139,6 +139,7 @@ class Grade(TimeRegistryBaseModel):
 class Child(TimeRegistryBaseModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     parent_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=30)
     birthdate = models.DateField()
     gender_id = models.OneToOneField(
         "Gender", on_delete=models.CASCADE, related_name="child_gender")
@@ -149,3 +150,11 @@ class Child(TimeRegistryBaseModel):
 
     class Meta:
         verbose_name_plural = "Children"
+
+
+class ChildPicture(models.Model):
+    child = models.ForeignKey(Child, on_delete=models.CASCADE, related_name='pictures')
+    picture = models.ImageField(upload_to='child_pictures/')
+
+    def __str__(self):
+        return f"Picture for {self.child.first_name}"
