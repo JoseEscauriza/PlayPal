@@ -26,3 +26,4 @@ DATABASES = {
         "PORT": env.str("DB_PORT")
     }
 }
+

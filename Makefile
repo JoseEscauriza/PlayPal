@@ -30,3 +30,7 @@ dev-shell:
 
 dev-test:
 	python manage.py test --settings=config.settings.dev
+
+dev-superuser:
+	python manage.py createsuperuser --settings=config.settings.dev
+
