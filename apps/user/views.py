@@ -60,6 +60,7 @@ def user_profile_own(request):
             "first_name": child.first_name,
             "gender": child.gender_id.gender_name,
             "age": (date.today() - child.birthdate).days // 365,
+            "bio": child.bio,
             "avatar": child.avatar.url if child.avatar else None,
             "interests": ', '.join([interest.interest_name for interest in child.interest_id.all()]),
             "child_images": [picture.picture.url for picture in child.pictures.all()],
