@@ -3,175 +3,231 @@
 {% block title %} Login {% endblock title %}
 
 {% block stylesheet %} {{ block.super}}
-<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 {% endblock stylesheet %}
 
 {% block content %}
 
-<section style="background-color: #eee;">
-   <form method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <div class="text-right text-lg-start mt-4 pt-2" >
-            <button  id="logout-button" type="submit" class="btn btn-primary btn-lg">Logout</button>
-          </div>
-      </form>
-
-  <div class="container py-5">
-
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <!-- if avatar is return it gets it, when not it shows predefined image src -->
-            <img src="{% if avatar %}{{ avatar }}{% else %}https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp{% endif %}"
-                 alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-
-            <h5 class="my-3">{{ first_name|default:'Your' }} {{ last_name|default:'name' }}</h5>
-            <p class="text-muted mb-1">Full Stack Father</p>
-            <p class="text-muted mb-4"> {{ location }}</p>
-            <div class="d-flex justify-content-center mb-2">
-              <button type="button" class="btn btn-primary">Edit profile</button>
-              <button type="button" class="btn btn-outline-primary ms-1">Change Avatar</button>
-            </div>
-          </div>
+<section style="background-color: #eee;" class="text-xxs">
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <div class="text-right text-lg-start mt-4 pt-2">
+            <button id="logout-button" type="submit" class="btn btn-primary btn-lg">Logout</button>
         </div>
-        <div class="card mb-4 mb-lg-0">
-          <div class="card-body p-0">
-            <ul class="list-group list-group-flush rounded-3">
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fas fa-globe fa-lg text-warning"></i>
-                <p class="mb-0">Some info/tags here</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                <p class="mb-0">Some info/tags here</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                <p class="mb-0">Some info/tags here</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                <p class="mb-0">Some info/tags here</p>
-              </li>
+    </form>
 
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-8">
-        <div class="card mb-4">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">First Name</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ first_name|default:'Your first name' }}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Last Name</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ last_name|default:'Your last name' }}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Email</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ email|default:'Your email' }}</p>
-              </div>
-            </div>
-            <!-- Mobile phone
-<!--            <hr>-->
-<!--            <div class="row">-->
-<!--              <div class="col-sm-3">-->
-<!--                <p class="mb-0">Mobile</p>-->
-<!--              </div>-->
-<!--              <div class="col-sm-9">-->
-<!--                <p class="text-muted mb-0">Your phone number</p>-->
-<!--              </div>-->
-<!--            </div>-->
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">City</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ location|default:'Your city' }} </p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Marital status</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ marital_status|default:'Your status' }} </p>
-              </div>
-            </div>
-             <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Gender</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{ gender|default:'Your gender' }} </p>
-              </div>
-            </div>
+    <div class="container py-5">
 
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Bio</p>
-              </div>
-              <div class="col-sm-9">
-                <textarea class="form-control" rows="4" placeholder="Enter your bio here">{{bio}}</textarea>
-              </div>
-            </div>
-
-
-          </div>
-
-        </div>
         <div class="row">
-          <div class="col-md-10">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <!-- if avatar is return it gets it, when not it shows predefined image src -->
+                        <img src="{% if avatar %}{{ avatar }}{% else %}https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp{% endif %}"
+                             alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
 
-            <div class="row">
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">My preferences</h5>
-                    <p class="card-text">Parent age range: </p>
-                    <p class="card-text">Parent gender: </p>
-                    <p class="card-text">Parent age range: </p>
+                        <h5 class="my-3">{{ first_name|default:'Your' }} {{ last_name|default:'name' }}</h5>
+                        <p class="text-muted mb-1">Full Stack Father</p>
+                        <p class="text-muted mb-4"> {{ location }}</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <button type="button" class="btn btn-primary">Edit profile</button>
+                            <button type="button" class="btn btn-outline-primary ms-1">Change Avatar</button>
+                        </div>
+                    </div>
+                </div>
 
-                    <a href="#" class="btn btn-primary">Edit preferences</a>
-                  </div>
+                <!-- Some infotags  section -->
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fas fa-globe fa-lg text-warning"></i>
+                                <p class="mb-0">Some info/tags here</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                                <p class="mb-0">Some info/tags here</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                                <p class="mb-0">Some info/tags here</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                                <p class="mb-0">Some info/tags here</p>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Add child</h5>
-                    <p class="card-text">Add info about your child</p>
-                    <a href="#" class="btn btn-primary">Edit</a>
-                  </div>
+
+                <!-- My profile data section -->
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">First Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ first_name|default:'Your first name' }}</p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Last Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ last_name|default:'Your last name' }}</p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ email|default:'Your email' }}</p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">City</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ location|default:'Your city' }} </p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Marital status</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ marital_status|default:'Your status' }} </p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Gender</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ gender|default:'Your gender' }} </p>
+                            </div>
+                        </div>
+
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Bio</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ bio|default:'Enter your bio here' }} </p>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              </div>
+
+                <!-- My children section -->
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">My children</h5>
+
+                        <div class="d-flex justify-content-left mb-2">
+                            <button type="button" class="btn btn-success">Add New Child</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% for child in children_data %}
+
+                <div class="card mb-4">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h5 class="mb-0"> {{ child.first_name|default:'Kiddo' }}</h5>
+                            </div>
+
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Age</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ child.age|default:'Your child age' }}</p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Gender</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ child.gender|default:'Your child gender' }}</p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Interests</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ child.interests|default:'Your child interests' }}</p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Bio</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ child.bio|default:'Say something about your child' }}</p>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+
+                        <!-- Child pictures-->
+
+                        <div class="container">
+                            <div class="row">
+                                {% for image in child.child_images %}
+                                <div class="col-md-3 ">
+                                    <div class="card card-square">
+                                        <img src="{{ image }}" class="card-img-top rounded"
+                                             alt="{{ child.first_ame }} img.">
+                                        <div class="card-body">
+                                            <!-- Any additional information related to the image -->
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-left">
+                            <button type="button" class="btn btn-primary">Edit Child Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
 
 
         </div>
-      </div>
+
     </div>
-  </div>
 </section>
 
 {% endblock content %}
