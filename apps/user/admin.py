@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.utils.safestring import mark_safe
 
 from .models import *
 from .forms import CustomUserChangeForm, CustomUserCreationForm
@@ -96,6 +97,20 @@ class CustomUserPhoto(admin.ModelAdmin):
         return obj.user_id.email
 
 
+@admin.register(ChildPicture)
+class ChildPictureAdmin(admin.ModelAdmin):
+    list_display = ["id", "get_child_name", "display_picture"]
+
+    def get_child_name(self, obj):
+        return obj.child.first_name
+
+    def display_picture(self, obj):
+        return mark_safe(f'<img src="{obj.picture.url}" style="max-width: 100px; max-height: 100px;" />')
+
+    get_child_name.short_description = "Child Name"
+    display_picture.short_description = "Picture Preview"
+
+
 class CustomGrade(admin.ModelAdmin):
     
     list_display = [
@@ -117,7 +132,7 @@ class CustomGrade(admin.ModelAdmin):
 class CustomChild(admin.ModelAdmin):
     
     list_display = [
-        "id",
+        "first_name",
         "get_parent",
         "birthdate",
         "get_gender",
