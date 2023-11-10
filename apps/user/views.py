@@ -65,5 +65,23 @@ def user_profile_own(request):
     return render(request, "user/user_page_own.html", context)
 
 
+@login_required
+def user_swiping(request):
+    userlist = CustomUser.objects.all()
+
+    context = {
+        "userlist": userlist
+        # "first_name": user.first_name,
+        # "last_name": user.last_name,
+        # "gender": user.gender,
+        # "verified_status": user.verified_status,
+        # "bio": user.bio,
+        # "location": user.location,
+        # "birthdate": user.birthdate,
+        # "marital_status": user.marital_status,
+        # "avatar": user.avatar.url if user.avatar else None,
+    }
+
+    return render(request, "user/swiping.html", context)
 # TODO:user_profile_own edit profile, change profile picture functs
 # TODO: make default smth for pages wher user must be logged-in, otherwise /profile page fails
