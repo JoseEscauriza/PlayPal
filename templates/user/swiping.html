@@ -5,7 +5,8 @@
 {% block stylesheet %} {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofVfLNXMRFFZjzA" crossorigin="anonymous">
-
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous"/>
 {% endblock stylesheet %}
 
 {% block content %}
@@ -106,23 +107,34 @@
                                         Looking for playmates for him</div>
 
                                     <div class="d-flex align-items-center ml-5">
-                                        <img src="{% static 'images/children.png' %}" class="float-left  children">
+                                        <img src="{% static 'images/children_pic.png' %}" class="float-left  children">
                                         <div class="font-weight-bold pt-1 h9-style ">My Children</div>
                                     </div>
 
-                                    <div class="text-muted description"></div>
+                                    <div class="font-weight-bold pt-1 h7-style ">John II, 9</div>
+                                    <div class="text-muted description">Emely is 9. She likes playing outside, and loves singing. </div>
+
+                                        <!-- Child Picture -->
+                                            <div class="row mt-3">
+                                                <div class="col-4">
+                                                    <img src="{% static 'images/pic1.png' %}" class="img-fluid">
+                                                </div>
+                                                <div class="col-4">
+                                                    <img src="{% static 'images/pic2.png' %}" class="img-fluid">
+                                                </div>
+                                                <div class="col-4">
+                                                    <img src="{% static 'images/pic3.png' %}" class="img-fluid">
+                                                </div>
+                                            </div>
+
+                                    <!-- Like dislike buttons-->
 
 
+                                    <div class="tinder--buttons mt-5">
+                                        <button id="nope1"><img src="{% static 'images/dislike.png' %}" alt="Remove"></button>
+                                        <button id="love1"><img src="{% static 'images/like.png' %}"></button>
+                                    </div>
 
-
-
-
-                                    <div class="d-flex align-items-center justify-content-between pt-3">
-                                        <div class="d-flex flex-column">
-                                            <div class="h6 font-weight-bold">36.99 USD</div>
-                                            <div class="text-muted rebate">48.56</div>
-                                        </div>
-                                        <div class="btn btn-primary">Buy now</div>
                                     </div>
                                 </div>
                             </div>
