@@ -1,0 +1,133 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<main class="messagePage my-xl">
+  <div class="content-box">
+    <div class="chat-header">
+      <a class="backButton" href="{% url 'inbox' %}"><i class="fa-solid fa-arrow-left"></i></a>
+      <h1 class="username-top">{{ other_user.first_name|capfirst }} {{other_user.last_name|capfirst }}</h1>
+    </div>
+
+    <div class="chat-message-container" id="chat-message-container">
+      {% for chat_message in chat_messages %}
+      <div
+        class="chatMessage{% if chat_message.sender == user %} chatMessage--right{% else %} chatMessage--left{% endif %}">
+        {{ chat_message.content|safe }}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="chat-bottom-section">
+      <form method="post" action="" class="chat-form">
+        {% csrf_token %}
+        <div class="chat-input">
+          <input
+            type="text"
+            name="content"
+            class="flex-1"
+            placeholder="Your message..."
+            id="chat-message-input"
+          />
+          <button id="chat-message-submit">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %} 
+{%block script%} 
+{{room.uuid|json_script:"json-room-uuid" }} 
+{{user.uuid|json_script:"json-sender-uuid" }} 
+{{other_user.uuid|json_script:"json-receiver-uuid" }}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+
+  const roomId = JSON.parse(
+    document.getElementById("json-room-uuid").textContent
+  );
+  const senderId = JSON.parse(
+    document.getElementById("json-sender-uuid").textContent
+  );
+  const receiverId = JSON.parse(
+    document.getElementById("json-receiver-uuid").textContent
+  );
+  const chatSocket = new WebSocket(
+    "ws://" + window.location.host + "/ws/" + roomId + "/"
+    );
+
+  chatSocket.onopen = function (e) {
+    console.log("yas bitch");
+  };
+
+  chatSocket.onclose = function (e) {
+    console.log("onclose");
+  };
+
+  chatSocket.onerror = function (e) {
+    console.error("WebSocket error:", e);
+  };
+
+  chatSocket.onmessage = function (e) {
+    try {
+      const data = JSON.parse(e.data);
+      const chatContainer = $("#chat-message-container");
+      const isCurrentUser = data.senderId === senderId;
+      const senderClass = isCurrentUser ? "chatMessage--right" : "chatMessage--left";
+      const newMessage = `<div class="chatMessage ${senderClass}">${data.message_content}</div>`;
+
+      chatContainer.append(newMessage);
+      
+      scrollToBottom();
+    } catch (error) {
+      console.error("Error parsing WebSocket data:", error);
+    }
+  };
+
+  document.querySelector("#chat-message-input").focus();
+  document.querySelector("#chat-message-input").onkeyup = function (e) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      document.querySelector("#chat-message-submit").click();
+    }
+  };
+
+  document.querySelector("#chat-message-submit").onclick = function (e) {
+    e.preventDefault();
+
+    const messageInputDom = document.querySelector("#chat-message-input");
+    const message_content = messageInputDom.value;
+
+    console.log({
+      message_content: message_content,
+      senderId: senderId,
+      receiverId: receiverId,
+      roomId: roomId,
+    });
+
+    chatSocket.send(
+      JSON.stringify({
+        message_content: message_content,
+        senderId: senderId,
+        receiverId: receiverId,
+        roomId: roomId,
+      })
+    );
+
+    messageInputDom.value = "";
+
+    return false;
+  };
+
+
+  function scrollToBottom() {
+    const chatContainer = document.getElementById("chat-message-container");
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  scrollToBottom();
+
+</script>
+{%endblock%}

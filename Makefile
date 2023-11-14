@@ -34,3 +34,6 @@ dev-test:
 dev-superuser:
 	python manage.py createsuperuser --settings=config.settings.dev
 
+dev-collectstatic:
+	python manage.py collectstatic
+
