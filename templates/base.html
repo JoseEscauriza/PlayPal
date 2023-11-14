@@ -9,9 +9,12 @@
     <title>{% block title %} PlayPal Application {% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 
     {% block stylesheet %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'uikit/styles/uikit.css' %}" />
     {% endblock %}
 
     {% block javascript %}
@@ -27,6 +30,8 @@
 
 </main>
 
-
 </body>
+{% block script %}
+
+{% endblock script%}
 </html>
