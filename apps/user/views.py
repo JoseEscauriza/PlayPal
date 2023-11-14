@@ -86,4 +86,3 @@ def user_profile_own(request):
 
 # TODO:add to user_profile_own: edit profile, change profile picture
 # TODO: make default look for smth for pages when user must be logged-in, otherwise /profile page fails
-
