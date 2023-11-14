@@ -4,6 +4,8 @@
 
 {% block stylesheet %} {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofVfLNXMRFFZjzA" crossorigin="anonymous">
+
 {% endblock stylesheet %}
 
 {% block content %}
@@ -71,16 +73,50 @@
                         <div class="form-inline d-flex align-items-center py-2"> <label class="tick"> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
                     </form>
                 </div>
-            </section> <!-- Products Section -->
+
+            </section> <!-- User Profiles Section -->
             <section id="products">
                 <div class="container py-3">
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
-                            <div class="card"> <img class="card-img-top" src="https://www.freepnglogos.com/uploads/cucumber-png/cucumber-png-image-purepng-transparent-png-26.png">
+
+                        <!-- User Card -->
+                        <div class="col-lg-5 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+
+
+
+                            <div class="card"> <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Rectangular_green_flag.svg/1280px-Rectangular_green_flag.svg.png">
+
                                 <div class="card-body">
-                                    <h6 class="font-weight-bold pt-1">Product title</h6>
-                                    <div class="text-muted description">Space for small product description</div>
-                                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
+
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="float-left rounded-circle avatar">
+                                        <h6 class="font-weight-bold pt-1 ">John Doe</h6>
+                                        <!-- Location -->
+
+                                        <div class="d-flex align-items-center ml-5">
+                                        <img src="{% static 'images/icons8-location-48.png' %}" class="float-left rounded-circle location">
+                                        <div class="font-weight-bold pt-1 h8-style ">Hagen</div>
+                                    </div>
+                                    </div>
+
+
+
+                                    <div class="font-weight-bold pt-1 h7-style ">About me</div>
+                                    <div class="text-muted description">I'm a proud father of my son.
+                                        Looking for playmates for him</div>
+
+                                    <div class="d-flex align-items-center ml-5">
+                                        <img src="{% static 'images/children.png' %}" class="float-left  children">
+                                        <div class="font-weight-bold pt-1 h9-style ">My Children</div>
+                                    </div>
+
+                                    <div class="text-muted description"></div>
+
+
+
+
+
+
                                     <div class="d-flex align-items-center justify-content-between pt-3">
                                         <div class="d-flex flex-column">
                                             <div class="h6 font-weight-bold">36.99 USD</div>
@@ -91,86 +127,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-md-0 pt-4">
-                            <div class="card"> <img class="card-img-top" src="https://www.freepnglogos.com/uploads/carrot-png/carrot-mint-with-turmeric-chia-equine-pure-delights-12.png">
-                                <div class="card-body">
-                                    <h6 class="font-weight-bold pt-1">Product title</h6>
-                                    <div class="text-muted description">Space for small product description</div>
-                                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                                    <div class="d-flex align-items-center justify-content-between pt-3">
-                                        <div class="d-flex flex-column">
-                                            <div class="h6 font-weight-bold">36.99 USD</div>
-                                            <div class="text-muted rebate">48.56</div>
-                                        </div>
-                                        <div class="btn btn-primary">Buy now</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-0 pt-4">
-                            <div class="card"> <img class="card-img-top" src="https://www.freepnglogos.com/uploads/tomato-png/tomato-bunch-fresh-tomatoes-png-image-pngpix-24.png">
-                                <div class="card-body">
-                                    <h6 class="font-weight-bold pt-1">Product title</h6>
-                                    <div class="text-muted description">Space for small product description</div>
-                                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                                    <div class="d-flex align-items-center justify-content-between pt-3">
-                                        <div class="d-flex flex-column">
-                                            <div class="h6 font-weight-bold">36.99 USD</div>
-                                            <div class="text-muted rebate">48.56</div>
-                                        </div>
-                                        <div class="btn btn-primary">Buy now</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
-                            <div class="card"> <img class="card-img-top" src="https://www.freepnglogos.com/uploads/grapes-png/grapes-grape-red-transparent-png-stickpng-5.png">
-                                <div class="card-body">
-                                    <h6 class="font-weight-bold pt-1">Product title</h6>
-                                    <div class="text-muted description">Space for small product description</div>
-                                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                                    <div class="d-flex align-items-center justify-content-between pt-3">
-                                        <div class="d-flex flex-column">
-                                            <div class="h6 font-weight-bold">36.99 USD</div>
-                                            <div class="text-muted rebate">48.56</div>
-                                        </div>
-                                        <div class="btn btn-primary">Buy now</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
-                            <div class="card"> <img class="card-img-top" src="https://www.freepnglogos.com/uploads/cucumber-png/cucumber-png-image-purepng-transparent-png-26.png">
-                                <div class="card-body">
-                                    <h6 class="font-weight-bold pt-1">Product title</h6>
-                                    <div class="text-muted description">Space for small product description</div>
-                                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                                    <div class="d-flex align-items-center justify-content-between pt-3">
-                                        <div class="d-flex flex-column">
-                                            <div class="h6 font-weight-bold">36.99 USD</div>
-                                            <div class="text-muted rebate">48.56</div>
-                                        </div>
-                                        <div class="btn btn-primary">Buy now</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
-                            <div class="card"> <img class="card-img-top" src="https://www.freepnglogos.com/uploads/watermelon-png/watermelon-gea-products-2.png">
-                                <div class="card-body">
-                                    <h6 class="font-weight-bold pt-1">Product title</h6>
-                                    <div class="text-muted description">Space for small product description</div>
-                                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                                    <div class="d-flex align-items-center justify-content-between pt-3">
-                                        <div class="d-flex flex-column">
-                                            <div class="h6 font-weight-bold">36.99 USD</div>
-                                            <div class="text-muted rebate">48.56</div>
-                                        </div>
-                                        <div class="btn btn-primary">Buy now</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
                     </div>
                 </div>
             </section>

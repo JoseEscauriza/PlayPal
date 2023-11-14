@@ -6,8 +6,8 @@
     margin: 10px; /* Add margin for spacing between cards */
 }
 .card-img-top {
-    max-height: px; /* Adjust the maximum height of the image */
-    max-width: 75px; /* Adjust the maximum width of the image */
+    max-height: 65px; /* Adjust the maximum height of the image */
+    max-width: px; /* Adjust the maximum width of the image */
     object-fit: cover; /* Maintain aspect ratio while covering the space */
 }
 
@@ -331,4 +331,59 @@ img{
     .content,#mobile-filter{
         clear: both;
     }
+}
+
+.card .card-body .message {
+  padding-left: 80px;
+
+  &::after {
+    clear: both;
+  }
+}
+
+.card .card-body .actions {
+  margin-top: 5px;
+}
+
+.avatar {
+    max-height: 55px; /* Adjust the maximum height of the image */
+    max-width: 55px; /* Adjust the maximum width of the image */
+    object-fit: cover; /* Maintain aspect ratio while covering the space */
+    margin-right: 5px;
+}
+
+.location {
+    max-height: 15px; /* Adjust the maximum height of the image */
+    max-width: 15px; /* Adjust the maximum width of the image */
+    object-fit: cover; /* Maintain aspect ratio while covering the space */
+    margin-right: 5px;
+    margin-left: 20px;
+
+
+}
+
+.h7-style{
+    font-size: 0.8rem; /* Adjust the size as needed */
+    font-weight: 500; /* Adjust the weight as needed */
+    margin-top: 10px;
+    /* Add any other styles you need */
+}
+
+.h8-style{
+    font-size: 0.8rem; /* Adjust the size as needed */
+    font-weight: 500; /* Adjust the weight as needed */
+    /* Add any other styles you need */
+}
+
+.h9-style{
+    font-size: 0.85rem; /* Adjust the size as needed */
+    font-weight: 550; /* Adjust the weight as needed */
+    /* Add any other styles you need */
+}
+
+.children {
+    max-height: 25px; /* Adjust the maximum height of the image */
+    max-width: 25px; /* Adjust the maximum width of the image */
+    object-fit: cover; /* Maintain aspect ratio while covering the space */
+    margin-right: 5px;
 }
