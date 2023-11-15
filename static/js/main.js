@@ -11,3 +11,4 @@ $('#parent-age').mdbRange({
     },
   }
 });
+

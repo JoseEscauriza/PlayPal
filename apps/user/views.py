@@ -96,5 +96,6 @@ def user_swiping(request):
 
     return render(request, "user/swiping.html", context)
 
+# TODO: add custom css stylesheet for m user_page_own
 # TODO:user_profile_own edit profile, change profile picture functs
 # TODO: make default smth for pages when user must be logged-in, otherwise /profile page fails

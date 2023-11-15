@@ -1,0 +1,16 @@
+/* Custom CSS styles */
+.card-square {
+    width: 75px; /* Adjust the width to your preferred size */
+    height: 75px; /* Adjust the height to your preferred size */
+    text-align: center; /* Center the content */
+    margin: 10px; /* Add margin for spacing between cards */
+}
+.card-img-top {
+    max-height: px; /* Adjust the maximum height of the image */
+    max-width: 75px; /* Adjust the maximum width of the image */
+    object-fit: cover; /* Maintain aspect ratio while covering the space */
+}
+
+.text-xxs {
+  font-size: 0.90rem; /* Adjust the font size as needed */
+}
