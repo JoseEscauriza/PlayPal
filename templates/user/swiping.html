@@ -30,8 +30,8 @@
                 aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fas fa-filter"></span>
         </button>
     </div>
-    <div id="mobile-filter"> <!-- Mobile section-->
-        <div class="py-3">
+    {% comment %} <div id="mobile-filter"> <!-- Mobile section-->
+        <div class="py-3"> MOBILE VERSION???
             <h5 class="font-weight-bold">Brands</h5>
             <form class="brand">
                 <div class="form-inline d-flex align-items-center py-1"><label class="tick">Royal Fields <input
@@ -73,28 +73,37 @@
                             class="check"></span> </label></div>
             </form>
         </div>
-    </div>
+    </div> {% endcomment %}
     <div class="content py-md-0 py-3"> <!-- Web section-->
         <section id="sidebar">
             <div class="py-3">
                 <h5 class="font-weight-bold">Preferences</h5>
                 <form class="user-preferences">
-                    <form class="bs-multi-range my-5 pb-5">
-                        <label for="parent-age-range" class="form-label">Parent's age range</label>
+                    <form class="bs-multi-range my-2 pb-2">
+                        <label for="parent-min-age-range" class="form-label">Parent's minimum age</label>
                         <input id="parent-age" class="multi-range" type="range" min="18" max="70">
                     </form>
 
-                    <form class="bs-multi-range my-5 pb-5">
-                        <label for="children-age-range" class="form-label">Child's age range</label>
+                    <form class="bs-multi-range my-2 pb-2">
+                        <label for="parent-max-age-range" class="form-label">Parent's maximum age</label>
+                        <input id="parent-age" class="multi-range" type="range" min="18" max="70">
+                    </form>
+
+                    <form class="bs-multi-range my-2 pb-2">
+                        <label for="children-min-age-range" class="form-label">Child's minimum age</label>
                         <input id="child-age" class="multi-range" type="range" min="1" max="10">
+                    </form>
 
-                        <div class="form-inline d-flex align-items-center py-2"><label class="tick">Sports<input
-                                type="checkbox"> <span class="check"></span></label></div>
-                        <div class="form-inline d-flex align-items-center py-2"><label class="tick">Music<input
-                                type="checkbox"> <span class="check"></span></label></div>
-                        <div class="form-inline d-flex align-items-center py-2"><label class="tick">Videogames<input
-                                type="checkbox"> <span class="check"></span></label></div>
-
+                    <form class="bs-multi-range my-2 pb-2">
+                        <label for="children-max-age-range" class="form-label">Child's maximum age</label>
+                        <input id="child-age" class="multi-range" type="range" min="1" max="10">
+                    </form>
+                    
+                    <form class=" my-2 pb-2">
+                        {% for interest in interestlist %}
+                    <div class="form-inline d-flex align-items-center py-2"><label class="tick">{{interest.interest_name}}<input
+                            type="checkbox"> <span class="check"></span></label></div>
+                        {% endfor %}
                     </form>
                 </form>
             </div>
