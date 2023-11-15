@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
-from .models import CustomUser
+from .models import CustomUser, Interest
 from .forms import CustomAuthenticationForm
 
 
@@ -87,22 +87,14 @@ def user_profile_own(request):
 @login_required
 def user_swiping(request):
     userlist = CustomUser.objects.all()
+    interestlist = Interest.objects.all()
 
     context = {
-        "userlist": userlist
-        # "first_name": user.first_name,
-        # "last_name": user.last_name,
-        # "gender": user.gender,
-        # "verified_status": user.verified_status,
-        # "bio": user.bio,
-        # "location": user.location,
-        # "birthdate": user.birthdate,
-        # "marital_status": user.marital_status,
-        # "avatar": user.avatar.url if user.avatar else None,
+        "userlist": userlist,
+        "interestlist": interestlist,
     }
 
     return render(request, "user/swiping.html", context)
 
 # TODO:user_profile_own edit profile, change profile picture functs
 # TODO: make default smth for pages when user must be logged-in, otherwise /profile page fails
-
