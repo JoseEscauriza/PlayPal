@@ -33,13 +33,8 @@
 .views{
     font-size: 0.85rem;
 }
-.btn{
-    color: #666;
-    font-size: 0.85rem;
-}
-.btn:hover{
-    color: #61b15a;
-}
+
+
 .green-label{
     background-color: #defadb;
     color: #48b83e;
@@ -242,16 +237,9 @@ div.h6,h6{
 .rebate{
     font-size: 0.9rem   ;
 }
-.btn.btn-primary{
-    background-color: #48b83e;
-    color: #fff;
-    border: 1px solid #008000;
-    border-radius: 10px;
-    font-weight: 800;
-}
-.btn.btn-primary:hover{
-    background-color: #48b83ee8;
-}
+
+
+
 img{
     width: 192px;
     height: 132px;
@@ -261,9 +249,7 @@ img{
 .clear{
     clear: both;
 }
-.btn.btn-success{
-    visibility: hidden;
-}
+
 @media(min-width:992px){
     .filter,#mobile-filter{
         display: none;
@@ -315,19 +301,11 @@ img{
         float: left;
         width: 80%;
     }
-    .btn.btn-success{
-        visibility: visible;
-        margin: 10px 0px;
-        color: #fff;
-        padding: 0.2rem 0.1rem;
-        width: 20%;
-    }
+
     .green-label{
         width: 50%;
     }
-    .btn.text-success{
-        padding: 0;
-    }
+
     .content,#mobile-filter{
         clear: both;
     }
@@ -441,5 +419,8 @@ img{
 hr {
     margin: 0.5rem 0; /* Adjust margin as needed (top and bottom) */
     padding: 0; /* Remove padding */
+}
 
+.smaller-text {
+    font-size: 14px; /* You can adjust the size as needed */
 }

@@ -86,6 +86,11 @@ def user_profile_own(request):
 
 @login_required
 def user_swiping(request):
+    if request.method == 'POST':
+        # Accessing a specific variable from the POST data
+        parent_min_age = request.POST.get('parent-min-age', None)
+        breakpoint()
+
     userlist = CustomUser.objects.all()
     interestlist = Interest.objects.all()
 
@@ -96,6 +101,5 @@ def user_swiping(request):
 
     return render(request, "user/swiping.html", context)
 
-# TODO: add custom css stylesheet for m user_page_own
 # TODO:user_profile_own edit profile, change profile picture functs
 # TODO: make default smth for pages when user must be logged-in, otherwise /profile page fails
