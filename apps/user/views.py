@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from .models import CustomUser
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
@@ -18,6 +18,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, TemplateView
 
 
+@user_passes_test(lambda u: not u.is_authenticated, login_url='logged_view')
 def login_view(request):
     error_message = None
     form = CustomAuthenticationForm()
