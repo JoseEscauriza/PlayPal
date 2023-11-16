@@ -1,4 +1,12 @@
 {% extends "base.html" %} 
+{% load static %}
+
+{% block stylesheet %}
+{{block.super}}
+<link rel="stylesheet" type="text/css" href="{% static 'uikit/styles/uikit.css' %}" />
+{% endblock stylesheet %}
+
+
 
 {% block content %}
 <main class="messagePage my-xl">
