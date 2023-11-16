@@ -149,6 +149,7 @@
             <div class="container py-3">
                 <div class="row">
 
+                    {% for user in userlist %}
                     <!-- User Card -->
                     <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
                         <div class="card shadow"><img class="card-img-top"
@@ -158,22 +159,20 @@
                                 <div class="card-body">
 
                                     <div class="d-flex align-items-center">
-                                        <img src="https://img.icons8.com/bubbles/100/000000/user.png"
+                                        <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp{% endif %}"
                                              class="float-left rounded-circle avatar">
-                                        <h6 class="font-weight-bold pt-1 ">John Doe</h6>
+                                        <h6 class="font-weight-bold pt-1 ">{{user.first_name}}</h6>
                                         <!-- Location -->
 
                                         <div class="d-flex align-items-center ml-5 ">
                                             <img src="{% static 'images/icons8-location-48.png' %}"
                                                  class="float-left rounded-circle location">
-                                            <div class="font-weight-bold pt-1 h8-style ">Hagen</div>
+                                            <div class="font-weight-bold pt-1 h8-style ">{{user.location}}</div>
                                         </div>
                                     </div>
 
                                     <div class="font-weight-bold pt-1 h9-style text-muted ">About me</div>
-                                    <div class="text-muted description">I'm a proud father of my son.
-                                        Looking for playmates for him
-                                    </div>
+                                    <div class="text-muted description">{{user.bio}}</div>
                                 </div>
                             </div>
 
@@ -185,7 +184,7 @@
 
                                 </div>
 
-                                <div class="font-weight-bold pt-1 h7-style ">John II, 9</div>
+                                <div class="font-weight-bold pt-1 h7-style ">Child's name</div>
                                 <div class="text-muted description">Emely is 9. She likes playing outside, and loves
                                     singing.
                                 </div>
@@ -238,11 +237,11 @@
                             </div>
                         </div>
                     </div>
-
+                    {% endfor %}
 
                     <!-- Seconds card -->
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
+                    {% comment %} <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
                         <div class="card shadow"><img class="card-img-top"
                                                       src="{% static 'images/card_bg/vivid-blurred-colorful-wallpaper-background.jpg' %}">
 
@@ -329,13 +328,13 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
 
 
 
                      <!-- Third card -->
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
+                    {% comment %} <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
                         <div class="card shadow"><img class="card-img-top"
                                                       src="{% static 'images/card_bg/vivid-blurred-colorful-wallpaper-background.jpg' %}">
 
@@ -422,7 +421,7 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
 
 
                 </div>

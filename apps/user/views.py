@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
-from .models import CustomUser, Interest
+from .models import CustomUser, Interest, Child
 from .forms import CustomAuthenticationForm
 
 
@@ -88,10 +88,12 @@ def user_profile_own(request):
 def user_swiping(request):
     userlist = CustomUser.objects.all()
     interestlist = Interest.objects.all()
+    childrenlist = Child.objects.all()
 
     context = {
         "userlist": userlist,
         "interestlist": interestlist,
+        "childrenlist": childrenlist,
     }
 
     return render(request, "user/swiping.html", context)
