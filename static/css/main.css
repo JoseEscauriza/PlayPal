@@ -224,9 +224,11 @@ div.text-muted{
     transition: all 0.5s ease-in-out;
     cursor: pointer;
 }
-.card-body{
-    padding: 0.5rem;
+.card-body {
+    padding: 0.5rem; /* Adjust the padding as needed */
+    padding-top: 0; /* Remove top padding */
 }
+
 .card-body .description{
     font-size: 0.78rem;
     padding-bottom: 8px;
@@ -434,4 +436,10 @@ img{
 
 .card-body-text{
     padding-left: 10px;
+}
+
+hr {
+    margin: 0.5rem 0; /* Adjust margin as needed (top and bottom) */
+    padding: 0; /* Remove padding */
+
 }

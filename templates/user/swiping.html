@@ -32,7 +32,8 @@
                 aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fas fa-filter"></span>
         </button>
     </div>
-    {% comment %} <div id="mobile-filter"> <!-- Mobile section-->
+    {% comment %}
+    <div id="mobile-filter"> <!-- Mobile section-->
         <div class="py-3"> MOBILE VERSION???
             <h5 class="font-weight-bold">Brands</h5>
             <form class="brand">
@@ -75,7 +76,8 @@
                             class="check"></span> </label></div>
             </form>
         </div>
-    </div> {% endcomment %}
+    </div>
+    {% endcomment %}
     <div class="content py-md-0 py-3"> <!-- Web section-->
         <section id="sidebar">
             <div class="py-3">
@@ -100,11 +102,11 @@
                         <label for="children-max-age-range" class="form-label">Child's maximum age</label>
                         <input id="child-age" class="multi-range" type="range" min="1" max="10">
                     </form>
-                    
+
                     <form class=" my-2 pb-2">
                         {% for interest in interestlist %}
-                    <div class="form-inline d-flex align-items-center py-2"><label class="tick">{{interest.interest_name}}<input
-                            type="checkbox"> <span class="check"></span></label></div>
+                        <div class="form-inline d-flex align-items-center py-2"><label class="tick">{{interest.interest_name}}<input
+                                type="checkbox"> <span class="check"></span></label></div>
                         {% endfor %}
                     </form>
                 </form>
@@ -148,35 +150,34 @@
                 <div class="row">
 
                     <!-- User Card -->
-                    <div class="col-lg-5 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+                    <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
                         <div class="card shadow"><img class="card-img-top"
-                                               src="{% static 'images/card_bg/vivid-blurred-colorful-wallpaper-background.jpg' %}">
+                                                      src="{% static 'images/card_bg/vivid-blurred-colorful-wallpaper-background.jpg' %}">
 
-                               <div class="bg-light">
-                                   <div class="card-body">
+                            <div class="bg-light">
+                                <div class="card-body">
 
-                                <div class="d-flex align-items-center">
-                                    <img src="https://img.icons8.com/bubbles/100/000000/user.png"
-                                         class="float-left rounded-circle avatar">
-                                    <h6 class="font-weight-bold pt-1 ">John Doe</h6>
-                                    <!-- Location -->
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://img.icons8.com/bubbles/100/000000/user.png"
+                                             class="float-left rounded-circle avatar">
+                                        <h6 class="font-weight-bold pt-1 ">John Doe</h6>
+                                        <!-- Location -->
 
-                                    <div class="d-flex align-items-center ml-5 ">
-                                        <img src="{% static 'images/icons8-location-48.png' %}"
-                                             class="float-left rounded-circle location">
-                                        <div class="font-weight-bold pt-1 h8-style ">Hagen</div>
+                                        <div class="d-flex align-items-center ml-5 ">
+                                            <img src="{% static 'images/icons8-location-48.png' %}"
+                                                 class="float-left rounded-circle location">
+                                            <div class="font-weight-bold pt-1 h8-style ">Hagen</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="font-weight-bold pt-1 h9-style text-muted ">About me</div>
+                                    <div class="text-muted description">I'm a proud father of my son.
+                                        Looking for playmates for him
                                     </div>
                                 </div>
-
-                                       <div class="font-weight-bold pt-1 h9-style text-muted ">About me</div>
-                                <div class="text-muted description">I'm a proud father of my son.
-                                    Looking for playmates for him
-                                </div>
-                                   </div>
-                    </div>
+                            </div>
 
                             <div class="card-body">
-
 
                                 <div class="d-flex align-items-center ml-5">
                                     <div class="font-weight-bold pt-1 h9-style ">My Children</div>
@@ -193,9 +194,9 @@
                                     <span class="badge  bg-primary">Football</span>
                                     <span class="badge  bg-success">Music</span>
                                     <span class="badge  bg-info">Guitar</span>
-                                    </div>
+                                </div>
 
-                                <hr class="hr hr-blurry" />
+                                <hr class="hr hr-blurry"/>
 
                                 <!-- Child Picture -->
                                 <div class="">
@@ -205,17 +206,117 @@
                                     </div>
                                     <div class="row px-3 pb-3">
                                         <div class="col-lg-6 col-6 mb-2 pr-lg-1">
-                                            <img src="https://images.unsplash.com/photo-1469594292607-7bd90f8d3ba4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" class="img-fluid rounded shadow-sm">
+                                            <img src="https://images.unsplash.com/photo-1469594292607-7bd90f8d3ba4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
                                         </div>
                                         <div class="col-lg-6 col-6 mb-2 pl-lg-1">
-                                            <img src="https://images.unsplash.com/photo-1493571716545-b559a19edd14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" class="img-fluid rounded shadow-sm">
+                                            <img src="https://images.unsplash.com/photo-1493571716545-b559a19edd14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
                                         </div>
                                         <div class="col-lg-6 col-6 pr-lg-1 mb-2">
-                                            <img src="https://images.unsplash.com/photo-1453791052107-5c843da62d97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="" class="img-fluid rounded shadow-sm">
+                                            <img src="https://images.unsplash.com/photo-1453791052107-5c843da62d97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
                                         </div>
                                         <div class="col-lg-6 col-6 pl-lg-1">
-                                            <img src="https://images.unsplash.com/photo-1475724017904-b712052c192a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" class="img-fluid rounded shadow-sm">
+                                            <img src="https://images.unsplash.com/photo-1475724017904-b712052c192a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
                                         </div>
+
+
+
+
+                                    </div>
+                                </div>
+
+                                <!-- Like dislike buttons-->
+                                <div class="tinder--buttons">
+                                    <button id="nope1"><img src="{% static 'images/dislike.png' %}" alt="Remove">
+                                    </button>
+                                    <button id="love1"><img src="{% static 'images/like.png' %}"></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Seconds card -->
+
+                    <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
+                        <div class="card shadow"><img class="card-img-top"
+                                                      src="{% static 'images/card_bg/vivid-blurred-colorful-wallpaper-background.jpg' %}">
+
+                            <div class="bg-light">
+                                <div class="card-body">
+
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://img.icons8.com/bubbles/100/000000/user.png"
+                                             class="float-left rounded-circle avatar">
+                                        <h6 class="font-weight-bold pt-1 ">John Doe</h6>
+                                        <!-- Location -->
+
+                                        <div class="d-flex align-items-center ml-5 ">
+                                            <img src="{% static 'images/icons8-location-48.png' %}"
+                                                 class="float-left rounded-circle location">
+                                            <div class="font-weight-bold pt-1 h8-style ">Hagen</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="font-weight-bold pt-1 h9-style text-muted ">About me</div>
+                                    <div class="text-muted description">I'm a proud father of my son.
+                                        Looking for playmates for him
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="d-flex align-items-center ml-5">
+                                    <div class="font-weight-bold pt-1 h9-style ">My Children</div>
+                                    <img src="{% static 'images/children_pic.png' %}" class="float-left children">
+
+                                </div>
+
+                                <div class="font-weight-bold pt-1 h7-style ">John II, 9</div>
+                                <div class="text-muted description">Emely is 9. She likes playing outside, and loves
+                                    singing.
+                                </div>
+
+                                <div>
+                                    <span class="badge  bg-primary">Football</span>
+                                    <span class="badge  bg-success">Music</span>
+                                    <span class="badge  bg-info">Guitar</span>
+                                </div>
+
+                                <hr class="hr hr-blurry"/>
+
+                                <!-- Child Picture -->
+                                <div class="">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="font-weight-bold pt-1 h9-style ">Pictures</div>
+                                        <a href="#" class="btn text-sm btn-link text-muted ">Show all</a>
+                                    </div>
+                                    <div class="row px-3 pb-3">
+                                        <div class="col-lg-6 col-6 mb-2 pr-lg-1">
+                                            <img src="https://images.unsplash.com/photo-1469594292607-7bd90f8d3ba4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-lg-6 col-6 mb-2 pl-lg-1">
+                                            <img src="https://images.unsplash.com/photo-1493571716545-b559a19edd14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-lg-6 col-6 pr-lg-1 mb-2">
+                                            <img src="https://images.unsplash.com/photo-1453791052107-5c843da62d97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-lg-6 col-6 pl-lg-1">
+                                            <img src="https://images.unsplash.com/photo-1475724017904-b712052c192a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+
+
+
+
                                     </div>
                                 </div>
 
@@ -232,13 +333,96 @@
 
 
 
+                     <!-- Third card -->
+
+                    <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
+                        <div class="card shadow"><img class="card-img-top"
+                                                      src="{% static 'images/card_bg/vivid-blurred-colorful-wallpaper-background.jpg' %}">
+
+                            <div class="bg-light">
+                                <div class="card-body">
+
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://img.icons8.com/bubbles/100/000000/user.png"
+                                             class="float-left rounded-circle avatar">
+                                        <h6 class="font-weight-bold pt-1 ">John Doe</h6>
+                                        <!-- Location -->
+
+                                        <div class="d-flex align-items-center ml-5 ">
+                                            <img src="{% static 'images/icons8-location-48.png' %}"
+                                                 class="float-left rounded-circle location">
+                                            <div class="font-weight-bold pt-1 h8-style ">Hagen</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="font-weight-bold pt-1 h9-style text-muted ">About me</div>
+                                    <div class="text-muted description">I'm a proud father of my son.
+                                        Looking for playmates for him
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="d-flex align-items-center ml-5">
+                                    <div class="font-weight-bold pt-1 h9-style ">My Children</div>
+                                    <img src="{% static 'images/children_pic.png' %}" class="float-left children">
+
+                                </div>
+
+                                <div class="font-weight-bold pt-1 h7-style ">John II, 9</div>
+                                <div class="text-muted description">Emely is 9. She likes playing outside, and loves
+                                    singing.
+                                </div>
+
+                                <div>
+                                    <span class="badge  bg-primary">Football</span>
+                                    <span class="badge  bg-success">Music</span>
+                                    <span class="badge  bg-info">Guitar</span>
+                                </div>
+
+                                <hr class="hr hr-blurry"/>
+
+                                <!-- Child Picture -->
+                                <div class="">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="font-weight-bold pt-1 h9-style ">Pictures</div>
+                                        <a href="#" class="btn text-sm btn-link text-muted ">Show all</a>
+                                    </div>
+                                    <div class="row px-3 pb-3">
+                                        <div class="col-lg-6 col-6 mb-2 pr-lg-1">
+                                            <img src="https://images.unsplash.com/photo-1469594292607-7bd90f8d3ba4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-lg-6 col-6 mb-2 pl-lg-1">
+                                            <img src="https://images.unsplash.com/photo-1493571716545-b559a19edd14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-lg-6 col-6 pr-lg-1 mb-2">
+                                            <img src="https://images.unsplash.com/photo-1453791052107-5c843da62d97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-lg-6 col-6 pl-lg-1">
+                                            <img src="https://images.unsplash.com/photo-1475724017904-b712052c192a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
 
 
 
-                    <!-- Seconds card -->
 
+                                    </div>
+                                </div>
 
+                                <!-- Like dislike buttons-->
+                                <div class="tinder--buttons">
+                                    <button id="nope1"><img src="{% static 'images/dislike.png' %}" alt="Remove">
+                                    </button>
+                                    <button id="love1"><img src="{% static 'images/like.png' %}"></button>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -256,8 +440,7 @@
 {% endblock javascript %}
 
 
-
- <!-- CARD THAT IM WORKING ON -->
+<!-- CARD THAT IM WORKING ON -->
 <!--                    <div class="col-lg-5 col-md-6 col-sm-10 offset-md-0 offset-sm-1">-->
 <!--                        <div class="card"><img class="card-img-top"-->
 <!--                                               src="{% static 'images/card_bg/vivid-blurred-colorful-wallpaper-background.jpg' %}">-->
