@@ -2,9 +2,11 @@ from typing import Optional
 from datetime import date, datetime, timedelta
 
 from django import forms
+from django.http.response import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
 
@@ -91,12 +93,17 @@ def user_profile_own(request):
     return render(request, "user/user_page_own.html", context)
 
 
-class UserRegister(CreateView, SuccessMessageMixin):
+class UserRegister(UserPassesTestMixin, CreateView, SuccessMessageMixin):
     template_name = 'user/registration.html'
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     success_message = "Your profile was created successfully"
 
+    def test_func(self):
+        return not self.request.user.is_authenticated
+
+    def handle_no_permission(self) -> HttpResponseRedirect:
+        return HttpResponseRedirect(reverse_lazy('own_profile'))
 
 # TODO:add to user_profile_own: edit profile, change profile picture
 # TODO: make default look for smth for pages when user must be logged-in, otherwise /profile page fails

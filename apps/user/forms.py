@@ -18,7 +18,7 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ("email", "password1", "password2")
 
     def save(self, commit=True) -> CustomUser:
-        user = super(CustomUserCreationForm, self).save(commit=False)
+        user = super(CustomUserCreationForm, self).save(commit=True)
         user.email = self.cleaned_data['email']
         if commit:
             user.save()

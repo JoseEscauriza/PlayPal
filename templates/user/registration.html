@@ -10,28 +10,54 @@
 
 <section class="vh-200 my-5">
     <div class="container-fluid h-custom">
-        <div class="col-md-8 col-lg-6 col-xl-5">
-            <form method="POST" action="{% url 'user-registration' %}">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                     class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form method="POST" action="{% url 'user_registration' %}">
+                    {% csrf_token %}
 
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input type="email" id="form3Example3" class="form-control form-control-lg"
+                        <input type="email" id="emailfield" class="form-control form-control-lg"
                                placeholder="Enter email" name="email"/>
-                        <label class="form-label" for="form3Example3">Email </label>
+                        <label class="form-label" for="emailfield">Email </label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-3">
-                        <input type="password" id="form3Example4" class="form-control form-control-lg"
-                               placeholder="Enter password" name="password"/>
-                        <label class="form-label" for="form3Example4">Password</label>
+                        <input type="password" id="passwordfield" class="form-control form-control-lg"
+                               placeholder="Enter password" name="password1"/>
+                        <label class="form-label" for="passwordfield">Password</label>
                     </div>
 
-                    <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                    <!-- 2nd Password input -->
+                    <div class="form-outline mb-3">
+                        <input type="password" id="passwordfield2" class="form-control form-control-lg"
+                               placeholder="Enter password" name="password2"/>
+                        <label class="form-label" for="passwordfield2">Please input your password again</label>
+                    </div>
 
-            </form>
+
+
+                    <!-- Display Error Message  -->
+                    {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_message }}
+                    </div>
+                    {% endif %}
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
+
 </section>
 
 {% endblock content %}
