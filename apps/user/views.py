@@ -115,6 +115,7 @@ def user_swiping(request):
                 'user': user,
                 'matching_children': [
                     child for child in user.child_set.all()
+                    # checks the selected min-max age for children
                     if (
                             child_max_age <=
                         child.birthdate <= child_min_age and
@@ -123,23 +124,29 @@ def user_swiping(request):
                 ]
             }
             for user in filtered_users
+            # checks if at least one matching child is present
+            if any(
+                child for child in user.child_set.all()
+                if (
+                        child_max_age <= child.birthdate <= child_min_age and
+                        any(interest.interest_name in interests for interest in child.interest_id.all())
+                )
+            )
         ]
-
         context = {
             "matching_users": matching_users,
         }
         return render(request, "user/swiping.html", context)
 
     else:
-        userlist = CustomUser.objects.all()
+        matching_users = CustomUser.objects.all()
         interestlist = Interest.objects.all()
         childrenlist = Child.objects.all()
 
         context = {
-            "userlist": userlist,
+            "matching_users": matching_users,
             "interestlist": interestlist,
             "childrenlist": childrenlist,
-            "matching_users": matching_users,
         }
 
         return render(request, "user/swiping.html", context)
