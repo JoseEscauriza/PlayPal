@@ -70,3 +70,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 content=message_content, 
                 is_read=False
                 )
+
+        if room.messages.count()==1:
+            system_message = room.messages.filter(sender=None).first()
+            if system_message:
+                system_message.delete()

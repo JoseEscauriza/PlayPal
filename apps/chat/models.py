@@ -19,9 +19,7 @@ class Room(TimeRegistryBaseModel):
             return self.messages.filter(created_at=last_message['last_message_time']).first()
         else:
             return None
-        
-    # def __str__(self):
-    #     return self.slug + "_chat"
+    
 
 class Message(TimeRegistryBaseModel):
     room = models.ForeignKey(Room, related_name='messages', on_delete=models.CASCADE)
