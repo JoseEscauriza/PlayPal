@@ -153,7 +153,7 @@ class Child(TimeRegistryBaseModel):
     parent_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30, default="Kiddo")
     birthdate = models.DateField()
-    gender_id = models.OneToOneField(
+    gender_id = models.ForeignKey(
         "Gender", on_delete=models.CASCADE, related_name="child_gender")
     bio = models.TextField()
     interest_id = models.ManyToManyField(
