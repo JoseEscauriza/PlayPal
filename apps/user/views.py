@@ -1,6 +1,7 @@
 from typing import Optional
 from datetime import date, datetime, timedelta
 
+from django.db.models import OuterRef, Subquery
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -89,6 +90,10 @@ def user_profile_own(request):
 @login_required
 def user_swiping(request):
     matching_users = []
+
+    # Fetch all interests
+    interest_list = Interest.objects.all()
+
     if request.method == 'POST':
         # Accessing a specific variable from the POST data
         parent_min_age = calculate_birthdate_from_age(request.POST.get('parent-min-age', 18))
@@ -113,45 +118,44 @@ def user_swiping(request):
         matching_users = [
             {
                 'user': user,
-                'matching_children': [
-                    child for child in user.child_set.all()
-                    # checks the selected min-max age for children
-                    if (
-                            child_max_age <=
-                        child.birthdate <= child_min_age and
-                            any(interest.interest_name in interests for interest in child.interest_id.all())
-                    )
-                ]
+                'matching_children': user.child_set.filter(
+                    birthdate__gte=child_max_age,
+                    birthdate__lte=child_min_age,
+                    interest_id__interest_name__in=interests
+                ).order_by('birthdate').first()
             }
             for user in filtered_users
-            # checks if at least one matching child is present
-            if any(
-                child for child in user.child_set.all()
-                if (
-                        child_max_age <= child.birthdate <= child_min_age and
-                        any(interest.interest_name in interests for interest in child.interest_id.all())
-                )
-            )
+            if user.child_set.filter(
+                birthdate__gte=child_max_age,
+                birthdate__lte=child_min_age,
+                interest_id__interest_name__in=interests
+            ).exists()
         ]
+
         context = {
             "matching_users": matching_users,
+            "interestlist": interest_list
         }
         return render(request, "user/swiping.html", context)
 
     else:
-        matching_users = CustomUser.objects.all()
-        interestlist = Interest.objects.all()
-        childrenlist = Child.objects.all()
 
+        # Retrieve all users with at least one child and their first child
+        matching_users = CustomUser.objects.filter(child__isnull=False).distinct()
+
+        # Prepare the context with matching users and their first child (if any) and interest for filters
         context = {
-            "matching_users": matching_users,
-            "interestlist": interestlist,
-            "childrenlist": childrenlist,
+            "matching_users": [
+                {
+                    'user': user,
+                    'matching_children': user.child_set.order_by('birthdate').first()
+                }
+                for user in matching_users
+            ],
+            "interestlist": interest_list
         }
-
         return render(request, "user/swiping.html", context)
 
-# TODO: get only 1st child of a user. Otherwise it'll mess up the cards
-# TODO: what to show when GET methon on swiping page. Save filters to preferences and reuser Pref?
+# TODO: what to show when GET method on swiping page. Save filters to preferences and reuser Pref?
 # TODO:user_profile_own edit profile, change profile picture functs
 # TODO: make default smth for pages when user must be logged-in, otherwise /profile page fails

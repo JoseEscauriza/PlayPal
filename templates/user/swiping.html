@@ -27,55 +27,6 @@
         </div>
     </div>
 
-    {% comment %}
-    <div id="mobile-filter"> <!-- Mobile section-->
-        <div class="py-3"> MOBILE VERSION???
-            <h5 class="font-weight-bold">Brands</h5>
-            <form class="brand">
-                <div class="form-inline d-flex align-items-center py-1"><label class="tick">Royal Fields <input
-                        type="checkbox"> <span class="check"></span> </label></div>
-                <div class="form-inline d-flex align-items-center py-1"><label class="tick">Crasmas Fields <input
-                        type="checkbox" checked> <span class="check"></span> </label></div>
-                <div class="form-inline d-flex align-items-center py-1"><label class="tick">Vegetarisma Farm <input
-                        type="checkbox" checked> <span class="check"></span> </label></div>
-                <div class="form-inline d-flex align-items-center py-1"><label class="tick">Farmar Field Eve <input
-                        type="checkbox"> <span class="check"></span> </label></div>
-                <div class="form-inline d-flex align-items-center py-1"><label class="tick">True Farmar Steve <input
-                        type="checkbox"> <span class="check"></span> </label></div>
-            </form>
-        </div>
-        <div class="py-3">
-            <h5 class="font-weight-bold">Rating</h5>
-            <form class="rating">
-                <div class="form-inline d-flex align-items-center py-2"><label class="tick"><span
-                        class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span> <span class="fas fa-star"></span> <input type="checkbox"> <span
-                            class="check"></span> </label></div>
-                <div class="form-inline d-flex align-items-center py-2"><label class="tick"> <span
-                        class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <input
-                            type="checkbox"> <span class="check"></span> </label></div>
-                <div class="form-inline d-flex align-items-center py-2"><label class="tick"><span
-                        class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span>
-                    <input type="checkbox"> <span class="check"></span> </label></div>
-                <div class="form-inline d-flex align-items-center py-2"><label class="tick"><span
-                        class="fas fa-star"></span> <span class="fas fa-star"></span> <span
-                        class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span>
-                    <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span
-                            class="check"></span> </label></div>
-                <div class="form-inline d-flex align-items-center py-2"><label class="tick"> <span
-                        class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span
-                        class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span>
-                    <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span
-                            class="check"></span> </label></div>
-            </form>
-        </div>
-    </div>
-    {% endcomment %}
-
-
-
 
     <div class="content py-md-0 py-3"> <!-- Web section-->
         <section id="sidebar">
@@ -87,124 +38,132 @@
                 <form class="combined-form" method="POST" action="{% url 'swiping' %}">
                     {% csrf_token %}
 
-                <!-- Parent's minimum age -->
-                <div class="bs-multi-range">
-                    <label for="parent-min-age-range" class="form-label h7-style">Parent's minimum age</label>
-                    <br>
-                    <input id="parent-min-age" name="parent-min-age" class="multi-range" type="range" min="18" max="70">
-                </div>
+                    <!-- Parent's minimum age -->
+                    <div class="bs-multi-range">
+                        <label for="parent-min-age-range" class="form-label h7-style">Parent's minimum age</label>
+                        <br>
+                        <input id="parent-min-age" name="parent-min-age" class="multi-range" type="range" min="18"
+                               max="70">
+                    </div>
 
-                <!-- Parent's maximum age -->
-                <div class="bs-multi-range">
-                    <label for="parent-max-age-range" class="form-label h7-style">Parent's maximum age</label>
-                    <br>
-                    <input id="parent-max-age" name="parent-max-age" class="multi-range" type="range" min="18" max="70">
-                </div>
+                    <!-- Parent's maximum age -->
+                    <div class="bs-multi-range">
+                        <label for="parent-max-age-range" class="form-label h7-style">Parent's maximum age</label>
+                        <br>
+                        <input id="parent-max-age" name="parent-max-age" class="multi-range" type="range" min="18"
+                               max="70">
+                    </div>
 
-                <!-- Child's minimum age -->
-                <div class="bs-multi-range">
-                    <label for="children-min-age-range" class="form-label h7-style">Child's minimum age</label>
-                    <br>
-                    <input id="child-min-age" name="child-min-age" class="multi-range" type="range" min="1" max="10">
-                </div>
+                    <!-- Child's minimum age -->
+                    <div class="bs-multi-range">
+                        <label for="children-min-age-range" class="form-label h7-style">Child's minimum age</label>
+                        <br>
+                        <input id="child-min-age" name="child-min-age" class="multi-range" type="range" min="1"
+                               max="10">
+                    </div>
 
-                <!-- Child's maximum age -->
-                <div class="bs-multi-range">
-                    <label for="children-max-age-range" class="form-label h7-style">Child's maximum age</label>
-                    <br>
-                    <input id="child-max-age" name="child-max-age" class="multi-range" type="range" min="1" max="10">
-                </div>
+                    <!-- Child's maximum age -->
+                    <div class="bs-multi-range">
+                        <label for="children-max-age-range" class="form-label h7-style">Child's maximum age</label>
+                        <br>
+                        <input id="child-max-age" name="child-max-age" class="multi-range" type="range" min="1"
+                               max="10">
+                    </div>
 
-                <!-- Interests -->
+                    <!-- Interests -->
                     <h6 class="font-weight-bold mt-2">Popular interests</h6>
 
-                <div class="my-2 pb-2">
-                    {% for interest in interestlist|slice:':5' %}
+                    <div class="my-2 pb-2">
+                        {% for interest in interestlist|slice:':5' %}
                         <div class="form-inline d-flex align-items-center py-2">
-                            <label class="tick">{{interest.interest_name}}<input type="checkbox" name="interests[]" value="{{interest.interest_name}}"> <span class="check"></span></label>
+                            <label class="tick">{{interest.interest_name}}<input type="checkbox" name="interests[]"
+                                                                                 value="{{interest.interest_name}}">
+                                <span class="check"></span></label>
                         </div>
-                    {% endfor %}
-                </div>
+                        {% endfor %}
+                    </div>
 
-                <!-- Rating -->
-                <h6 class="font-weight-bold">Parent Rating</h6>
-                        <!-- Rating option 1 -->
-                        <div class="form-inline d-flex align-items-center py-2">
-                            <label class="tick">
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <input type="checkbox" name="rating[]" value="5">
-                                <span class="check"></span>
-                            </label>
-                        </div>
+                    <!-- Rating -->
+                    <h6 class="font-weight-bold">Parent Rating</h6>
+                    <!-- Rating option 1 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <input type="checkbox" name="rating[]" value="5">
+                            <span class="check"></span>
+                        </label>
+                    </div>
 
-                        <!-- Rating option 2 -->
-                        <div class="form-inline d-flex align-items-center py-2">
-                            <label class="tick">
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <input type="checkbox" name="rating[]" value="4">
-                                <span class="check"></span>
-                            </label>
-                        </div>
+                    <!-- Rating option 2 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <input type="checkbox" name="rating[]" value="4">
+                            <span class="check"></span>
+                        </label>
+                    </div>
 
-                        <!-- Rating option 3 -->
-                        <div class="form-inline d-flex align-items-center py-2">
-                            <label class="tick">
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <input type="checkbox" name="rating[]" value="3">
-                                <span class="check"></span>
-                            </label>
-                        </div>
+                    <!-- Rating option 3 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <input type="checkbox" name="rating[]" value="3">
+                            <span class="check"></span>
+                        </label>
+                    </div>
 
-                        <!-- Rating option 4 -->
-                        <div class="form-inline d-flex align-items-center py-2">
-                            <label class="tick">
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <input type="checkbox" name="rating[]" value="2">
-                                <span class="check"></span>
-                            </label>
-                        </div>
+                    <!-- Rating option 4 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <input type="checkbox" name="rating[]" value="2">
+                            <span class="check"></span>
+                        </label>
+                    </div>
 
-                        <!-- Rating option 5 -->
-                        <div class="form-inline d-flex align-items-center py-2">
-                            <label class="tick">
-                                <span class="fas fa-star"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <span class="far fa-star px-1 text-muted"></span>
-                                <input type="checkbox" name="rating[]" value="1">
-                                <span class="check"></span>
-                            </label>
-                        </div>
+                    <!-- Rating option 5 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <input type="checkbox" name="rating[]" value="1">
+                            <span class="check"></span>
+                        </label>
+                    </div>
 
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn mt-3">Find Matches</button>
-            </form>
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn mt-3">Find Matches</button>
+                </form>
+
+        </section>
+        <!-- User Profiles Section -->
 
 
-        </section> <!-- User Profiles Section -->
         <section id="products">
             <div class="container py-3">
                 <div class="row">
 
                     {% for user_info in matching_users %}
-                        {% with user=user_info.user %}
+                    {% with user=user_info.user %}
 
 
                     <!-- User Card -->
@@ -245,8 +204,9 @@
 
                                 {% with child=user_info.matching_children %}
 
-                                <div class="font-weight-bold pt-1 h7-style ">{{child.first_name|default:"Kiddo"}}</div>
-                                <div class="text-muted description">{{child.bio|default:"This is bio"}}
+
+                                <div class="font-weight-bold pt-1 h7-style ">{{child.first_name|default:'Kiddo'}}</div>
+                                <div class="text-muted description">{{child.bio|default:'This is bio'}}
                                 </div>
 
                                 <div>
@@ -284,7 +244,7 @@
 
                                     </div>
                                 </div>
-                                    {% endwith %}
+                                {% endwith %}
 
                                 <!-- Like dislike buttons-->
                                 <div class="tinder--buttons">
@@ -301,7 +261,7 @@
 
                 </div>
             </div>
-     </div>
+    </div>
     </section>
 </div>
 </div>
