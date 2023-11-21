@@ -89,8 +89,6 @@ def user_profile_own(request):
 
 @login_required
 def user_swiping(request):
-    matching_users = []
-
     # Fetch all interests
     interest_list = Interest.objects.all()
 
@@ -102,9 +100,6 @@ def user_swiping(request):
         child_max_age = calculate_birthdate_from_age(request.POST.get('child-max-age', 10))
         interests = request.POST.getlist('interests[]', None)
         rating = request.POST.getlist('rating[]', None)
-
-        # p parent_min_age, parent_max_age, child_min_age, child_max_age, interests, rating
-        # p request.POST
 
         # Filter by parent age range
         filtered_users = CustomUser.objects.filter(
@@ -156,6 +151,5 @@ def user_swiping(request):
         }
         return render(request, "user/swiping.html", context)
 
-# TODO: what to show when GET method on swiping page. Save filters to preferences and reuser Pref?
 # TODO:user_profile_own edit profile, change profile picture functs
 # TODO: make default smth for pages when user must be logged-in, otherwise /profile page fails
