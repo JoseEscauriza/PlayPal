@@ -324,8 +324,8 @@ img{
 }
 
 .avatar {
-    max-height: 75px; /* Adjust the maximum height of the image */
-    max-width: 75px; /* Adjust the maximum width of the image */
+    max-height: 65px; /* Adjust the maximum height of the image */
+    max-width: 65px; /* Adjust the maximum width of the image */
     object-fit: cover; /* Maintain aspect ratio while covering the space */
     margin-right: 5px;
 }
