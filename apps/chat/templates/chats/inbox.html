@@ -20,7 +20,7 @@
       <ul class="messages">
         {% for room in rooms %}
           {% with room|last_message as last_message %}
-          {% if not last_message.is_read and last_message.sender == room.partner %}
+          {% if not last_message.is_read and last_message.sender == room.partner or last_message.sender == None %}
             <li class="message message--unread">
             <a href='{% url "room" room.uuid %}'>
               <span class="chat__partner">{{ room.partner.first_name|capfirst }} {{ room.partner.last_name|capfirst }}</span>

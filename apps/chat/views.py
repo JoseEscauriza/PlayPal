@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from .models import Message, Room
+from apps.user.utils import check_mutual_like
 
+from apps.user.models import CustomUser
 
 
 @login_required(login_url="login")
@@ -10,7 +12,6 @@ def inbox(request):
     user = request.user
     rooms = Room.objects.filter(members=user)
     unread_message_count = Message.objects.filter(recipient=request.user, is_read=False).count()
-
 
     for room in rooms:
         room.partner = room.get_partner(user)

@@ -10,4 +10,4 @@ def last_message(room):
 
 @register.filter
 def unread_messages_count(user):
-    return Message.objects.filter(recipient=user.profile, is_read=False).count()
+    return Message.objects.filter(recipient=user.uuid, is_read=False).count()
