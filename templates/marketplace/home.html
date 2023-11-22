@@ -3,9 +3,8 @@
 
 {% block title %} Home {% endblock title %}
 
-{% block stylesheet %}
-    {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
+{% block stylesheet %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
 {% endblock stylesheet %}
 
 {% block content %}
@@ -20,12 +19,9 @@
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="h-100">
-                        <h1 class="display-6 mb-5">We Help Find PlayPals</h1>
-                        <div class="bg-light border-bottom border-5 border-primary rounded p-4 mb-4">
-                            <p class="text-dark mb-2">Aliqu diam amet diam et eos. Clita erat ipsum et lorem sed stet lorem sit clita duo justo erat amet</p>
-                        </div>
-                        <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                        <a class="btn btn-primary py-2 px-3 me-3" href="">
+                        <h1 class="display-6 mb-5">Welcome to Playpal - Where Connections Transform into Playdates!</h1>
+                        <p class="mb-5">Playpal is not just another web application; it's a vibrant community designed to bring parents together for the joy of their children. Our platform makes it easy and fun to connect with other parents in your area, fostering meaningful relationships that extend beyond the digital realm.</p>
+                        {% comment %} <a class="btn btn-primary py-2 px-3 me-3" href="">
                             Learn More
                             <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
                                 <i class="fa fa-arrow-right"></i>
@@ -35,7 +31,7 @@
                             Contact Us
                             <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
                                 <i class="fa fa-arrow-right"></i>
-                            </div>
+                            </div>{% endcomment %}
                         </a>
                     </div>
                 </div>
@@ -53,35 +49,36 @@
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item bg-white text-center h-100 p-4 p-xl-5">
-                        <h4 class="mb-3">Test</h4>
-                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                        <a class="btn btn-outline-primary px-3" href="">
+                        <h4 class="mb-3">Connect with Like-minded parents</h4>
+                        <p class="mb-4">Discover a network of parents who share similar interests, parenting styles, and scheduling preferences. Playpal's intuitive matching algorithm ensures that you connect with families who align with your values, creating the perfect environment for lasting connections.</p>
+                        {% comment %} <a class="btn btn-outline-primary px-3" href="">
                             Learn More
                             <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
                                 <i class="fa fa-arrow-right"></i>
                             </div>
-                        </a>
+                        </a> {% endcomment %}
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="service-item bg-white text-center h-100 p-4 p-xl-5">
-                        <h4 class="mb-3">Test</h4>
-                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                        <a class="btn btn-outline-primary px-3" href="">
+                        <h4 class="mb-3">Effortless Playdate Planning</h4>
+                        <p class="mb-4">Say goodbye to the hassle of coordinating playdates through multiple channels. Playpal streamlines the process, allowing you to schedule, coordinate, and confirm playdates with just a few clicks. It's the modern solution to making sure your child has a fantastic time with friends while giving you the chance to build your own community.</p>
+                        {% comment %} <a class="btn btn-outline-primary px-3" href="">
                             Learn More
                             <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
                                 <i class="fa fa-arrow-right"></i>
                             </div>
-                        </a>
+                        </a> {% endcomment %}
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="service-item bg-white text-center h-100 p-4 p-xl-5">
-                        <h4 class="mb-3">Test</h4>
-                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                        <a class="btn btn-outline-primary px-3" href="">
-                            Learn More
-                            <div class="d-inline-flex btn-sm-square bg-primary text-white rounded-circle ms-2">
+                        <h4 class="mb-3">Join PlayPal today!</h4>
+                        <p class="mb-4">Embark on a journey of connection, laughter, and shared experiences. Sign up for Playpal today and let the adventures begin!
+                        Ready to make parenting even more delightful? Join Playpal now!</p>
+                        <a class="btn btn-outline-success px-3" href="#">
+                            Register
+                            <div class="d-inline-flex btn-sm-square bg-success text-white rounded-circle ms-2">
                                 <i class="fa fa-arrow-right"></i>
                             </div>
                         </a>
@@ -105,9 +102,8 @@
                             <h5>Jose Escauriza</h5>
                             <p class="text-primary">Product Owner</p>
                             <div class="team-social text-center">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square" href="https://github.com/JoseEscauriza"><i class="fab fa-github"></i></a>
+                                <a class="btn btn-square" href="https://www.linkedin.com/in/jose-escauriza/"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
@@ -116,11 +112,10 @@
                     <div class="team-item position-relative rounded overflow-hidden">
                         <div class="team-text bg-light text-center p-4">
                             <h5>Sophie Keesing</h5>
-                            <p class="text-primary">SCRUM Master</p>
+                            <p class="text-primary">Scrum Master</p>
                             <div class="team-social text-center">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square" href="https://github.com/sophkees1"><i class="fab fa-github"></i></a>
+                                <a class="btn btn-square" href="https://www.linkedin.com/in/sophie-kaitlin-k-53394a288/"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
@@ -131,9 +126,8 @@
                             <h5>Timo Gronau</h5>
                             <p class="text-primary">Backend Developer</p>
                             <div class="team-social text-center">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square" href="https://github.com/TimoGronau"><i class="fab fa-github"></i></a>
+                                <a class="btn btn-square" href="https://www.linkedin.com/in/timo-gronau-360079275/"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
@@ -144,9 +138,8 @@
                             <h5>Bogdan Bilan</h5>
                             <p class="text-primary">Backend Developer</p>
                             <div class="team-social text-center">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square" href="https://github.com/bobilan"><i class="fab fa-github"></i></a>
+                                <a class="btn btn-square" href="https://www.linkedin.com/in/bogdan-bilan/"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
