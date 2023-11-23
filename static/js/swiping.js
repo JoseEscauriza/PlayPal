@@ -1,7 +1,7 @@
 // The idea was when pressed like button go to record_action view, saved to DB and don't reload the page
 // when pressed nope button go to record_action view, saved to DB as disliked and remove the card
 //(or reload the page, in swiping views just add check if card is in disliked then don't display it )
-// Problems:  record_action is not being accessed and and not working at all:)
+// Problems:  record_action is not being accessed and and not working at all:) (seem to be working now)
 // What i did: added record_action view, added js, made url in user urls.py, directly in swiping.html added vars
 //<div id="recordAction" data-url="{% url 'record_action' %}"></div>
 //<div id="swipingUrl" data-url="{% url 'swiping' %}"></div>
