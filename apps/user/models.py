@@ -109,6 +109,17 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
         MaritalStatus, on_delete=models.CASCADE, null=True, blank=True)
     avatar = models.ImageField(
         upload_to="avatars/", null=True, blank=True)
+    blocked_users=models.ManyToManyField("self", symmetrical=False, related_name="blocked_by", blank=True)
+    liked_users=models.ManyToManyField("self", symmetrical=False, related_name="liked_by", blank=True)
+    disliked_users=models.ManyToManyField("self", symmetrical=False, related_name="disliked_by", blank=True)
+
+    #orm to retrieve all users (..) by current user:
+    #logged_in_user = CustomUser.objects.get(id=request.user.uuid)
+    #blocked_users = logged_in_user.blocked_users.all()
+
+    #orm to retrieve all users current user is (...) by:
+    #logged_in_user = CustomUser.objects.get(id=request.user.uuid)
+    #blocked_by = logged_in_user.blocked_by.all()
 
     objects = CustomUserManager()
 

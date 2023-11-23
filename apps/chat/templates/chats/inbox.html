@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block stylesheet %}
+{{block.super}}
+<link rel="stylesheet" type="text/css" href="{% static 'uikit/styles/uikit.css' %}" />
+{% endblock stylesheet %}
+
+
+{% block content %}
+  
+  <main class="inbox my-xl">
+    <div class="content-box">
+      {% if unread_message_count %}
+      <h3 class="inbox__title">New Messages (<span style="font-size: 100%;"> {{unread_message_count}}</span>)</h3>
+      {% else %}
+      <h3 class="inbox__title">Messages</h3>
+      {% endif %}
+      <ul class="messages">
+        {% for room in rooms %}
+          {% with room|last_message as last_message %}
+          {% if not last_message.is_read and last_message.sender == room.partner or last_message.sender == None %}
+            <li class="message message--unread">
+            <a href='{% url "room" room.uuid %}'>
+              <span class="chat__partner">{{ room.partner.first_name|capfirst }} {{ room.partner.last_name|capfirst }}</span>
+              <span class="message__content">{{ last_message.content|slice:"25" }}</span>
+              <span class="message__created_at">{{ last_message.created_at }}</span>
+            </a>
+          </li>
+          {% else %}
+          <li class="message">
+            <a href='{% url "room" room.uuid %}'>
+              <span class="chat__partner">{{ room.partner.first_name|capfirst }} {{ room.partner.last_name|capfirst }}</span>
+              <span class="message__content">{{ last_message.content|slice:"25" }}</span>
+              <span class="message__created_at">{{ last_message.created_at }}</span>
+            </a>
+          </li>
+          {% endif %}
+          {% endwith %}
+        {% endfor %}
+      </ul>
+    </div>
+  </main>
+
+{% endblock content %}
+
+{% block script %}
+
+{% endblock script %}

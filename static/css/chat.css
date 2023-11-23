@@ -1,0 +1,218 @@
+.inbox {
+    height: 90vh;
+  }
+
+.inbox__title,
+.inbox__title span {
+  font-size: 3 rem;
+  font-weight: 400;
+  color: var(--color-sub);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.inbox__title span {
+  color: var(--color-main);
+}
+
+.messages {
+  list-style: none;
+  background: var(--color-white);
+  padding: 0.5rem 3rem;
+  border: 2px solid var(--color-light);
+  border-radius: 0.7rem;
+}
+
+.message {
+  padding: 2.5rem 0;
+}
+
+.message > a span {
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+.messages a:hover {
+  text-decoration: none;
+}
+
+.message.message--unread a span {
+  font-weight: 700;
+  color: var(--color-sub);
+}
+
+.message:not(:last-child) {
+  border-bottom: 2px solid var(--color-white-light);
+}
+
+.message > a {
+  display: flex;
+  gap: 1rem;
+}
+
+.chat__partner,
+.last_message__created_at {
+  flex-basis: 25%;
+}
+
+.message__content {
+  flex-basis: 50%;
+}
+
+.last_message__created_at {
+  text-align: right;
+}
+
+
+
+/*chat specific*/
+
+.content-box {
+  width: 95%;
+  max-width: 85rem;
+  background-color: var(--color-white);
+  height: calc(100vh - 230px);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--color-light);
+  border-radius: 0.7rem;
+  margin: auto;
+}
+
+.chat-message-container {
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.chat-message-container::-webkit-scrollbar { 
+  display: none;
+}
+
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 25px 8px;
+  position: relative;
+}
+
+.username-top {
+  width: fit-content;
+  position: absolute;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+.chat-bottom-section {
+  border-top: 1px solid #fffefd;
+  padding: 8px;
+}
+
+.chat-input {
+  display: flex;
+  width: 100%;
+}
+
+.chat-input input:focus{
+  outline: none;
+  border: none;
+}
+
+.chat-input input {
+  width: 100%;
+  border: none;
+  background-color: var(--color-light);
+  padding: 16px 0 16px 8px;
+  border-radius: 0.7rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#chat-message-submit {
+  padding: 0 16px;
+  border: 0;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-light);
+  border-top-right-radius: 0.7rem;
+  border-bottom-right-radius: 0.7rem;
+  cursor: pointer;
+}
+
+
+/* Styles for the backButton (child of chat-header) */
+.chat-header .backButton {
+  background: var(--color-main-light);
+  color: var(--color-main);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Styles for chatMessage elements (children of chat-message-container) */
+.chat-message-container .chatMessage {
+  display: block;
+  background-color: var(--color-sub);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 2 rem;
+  font-weight: 500;
+  margin: 8px;
+  text-align: left;
+  word-wrap: break-word; 
+  max-width: 40%; 
+}
+
+
+/* Styles for chatMessage--right (child of chatMessage) */
+.chat-message-container .chatMessage--right {
+  background: turquoise;
+  color: white;
+  align-self: flex-end;
+}
+
+/* Styles for chatMessage--left (child of chatMessage) */
+.chat-message-container .chatMessage--left {
+  background: gray;
+  color: white;
+  align-self: flex-start;
+}
+
+.chat-message-container .chatMessage--system {
+  background: black;
+  color: white;
+  align-self: center;
+}
+
+/* Styles for the chat-input (child of chat-message-container) */
+.chat-message-container .chat-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Styles for id_message_send_input (child of chat-input) */
+.chat-message-container .chat-input #id_message_send_input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--color-light);
+  border-radius: 0.5rem;
+}
+
+/* Styles for id_message_send_button (child of chat-input) */
+.chat-message-container .chat-input #id_message_send_button {
+  background: var(--color-sub);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

@@ -20,7 +20,10 @@ class CustomUserAdmin(UserAdmin):
             "birthdate",
             "avatar",
             "gender",
-            "marital_status"
+            "marital_status",
+            "blocked_users",
+            "liked_users",
+            "disliked_users",
         )
         }
          ),
