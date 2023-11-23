@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import Http404
+from django.http import JsonResponse
 
 from .models import CustomUser, Interest, Child
 from .forms import CustomAuthenticationForm
@@ -151,9 +152,6 @@ def user_swiping(request):
         }
         return render(request, "user/swiping.html", context)
 
-# TODO:user_profile_own edit profile, change profile picture functs
-# TODO: make default smth for pages when user must be logged-in, otherwise /profile page fails
-
 
 @login_required
 def other_user_profile(request, user_uuid):
@@ -164,7 +162,6 @@ def other_user_profile(request, user_uuid):
 
         if user is None:
             raise Http404("User not found.")
-
 
         # Loop through the children
         for child in user.child_set.all():
@@ -196,3 +193,30 @@ def other_user_profile(request, user_uuid):
 
     except ValueError:
         raise Http404("Invalid UUID format.")
+
+
+def record_action(request):
+    if request.method == 'POST' and request.is_ajax():
+        user_id = request.POST.get('user_id')
+        action = request.POST.get('action')
+
+        # Assuming user_id is the UUID passed to your function
+        user_id = uuid.UUID(user_id)
+
+        # Retrieve the user by UUID
+        liked_user = CustomUser.objects.get(id=user_id)
+        breakpoint()
+
+        # Record the action based on the provided action parameter
+        if action == 'like':
+            request.user.liked_users.add(liked_user)
+        elif action == 'nope':
+            request.user.disliked_users.add(liked_user)
+
+        return JsonResponse({'message': f'User {action}d successfully'})
+    else:
+        return JsonResponse({'message': 'Invalid request'})
+
+# TODO:user_profile_own edit profile, change profile picture functs
+# TODO: make default smth for pages when user must be logged-in, otherwise /profile page fails
+

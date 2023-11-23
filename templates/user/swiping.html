@@ -4,8 +4,7 @@
 
 {% block stylesheet %} {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'css/swiping.css' %}"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofVfLNXMRFFZjzA" crossorigin="anonymous">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
       integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous"/>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
@@ -168,7 +167,7 @@
 
                     <!-- User Card -->
                     <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
-                        <div class="card shadow"><img class="card-img-top"
+                        <div class="card shadow" data-user-id="{{ user.uuid }}"><img class="card-img-top"
                                                       src="{% static 'images/card_bg/vivid-blurred-colorful-wallpaper-background.jpg' %}">
 
                             <div class="bg-light">
@@ -245,12 +244,19 @@
                                 </div>
                                 {% endwith %}
 
-                                <!-- Like dislike buttons-->
-                                <div class="tinder--buttons">
-                                    <button id="nope1"><img src="{% static 'images/dislike.png' %}" alt="Remove">
-                                    </button>
-                                    <button id="love1"><img src="{% static 'images/like.png' %}"></button>
-                                </div>
+                                <!-- Like / Dislike buttons-->
+
+                            <div class="tinder--buttons">
+                                <button id="nope1" class="btn btn-outline-danger btn-rounded">
+                                    <img src="{% static 'images/dislike.png' %}" alt="Remove">
+                                </button>
+
+                                <button id="love1" class="btn btn-outline-success btn-rounded">
+                                    <img src="{% static 'images/like.png' %}">
+                                </button>
+                            </div>
+
+
 
                             </div>
                         </div>
@@ -270,4 +276,6 @@
 
 {% block javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static 'js/swiping.js' %}"></script>
+
 {% endblock javascript %}
