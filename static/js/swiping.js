@@ -2,6 +2,10 @@
 // when pressed nope button go to record_action view, saved to DB as disliked and remove the card
 //(or reload the page, in swiping views just add check if card is in disliked then don't display it )
 // Problems:  record_action is not being accessed and and not working at all:)
+// What i did: added record_action view, added js, made url in user urls.py, directly in swiping.html added vars
+//<div id="recordAction" data-url="{% url 'record_action' %}"></div>
+//<div id="swipingUrl" data-url="{% url 'swiping' %}"></div>
+// while i couldn't access them directly from js using {% url %}.
 
 $(document).ready(function () {
     // Function to handle both "nope" and "like" actions
