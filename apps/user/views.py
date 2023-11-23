@@ -110,6 +110,10 @@ def user_swiping(request):
             'child_set'
         )
 
+        # Exclude users who are in the current user's disliked_users
+        disliked_users = request.user.disliked_users.all()
+        filtered_users = filtered_users.exclude(uuid__in=disliked_users)
+
         # Filter by matching child
         matching_users = [
             {
@@ -197,7 +201,7 @@ def other_user_profile(request, user_uuid):
 
 def record_action(request):
 
-    if request.method == 'POST' and request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+    if request.method == 'POST':
         user_id = request.POST.get('user_id')
         action = request.POST.get('action')
 
@@ -205,8 +209,7 @@ def record_action(request):
         user_id = uuid.UUID(user_id)
 
         # Retrieve the user by UUID
-        liked_user = CustomUser.objects.get(id=user_id)
-        breakpoint()
+        liked_user = CustomUser.objects.get(uuid=user_id)
 
         # Record the action based on the provided action parameter
         if action == 'like':

@@ -247,19 +247,17 @@
                                 </div>
                                 {% endwith %}
 
-                                <!-- Like / Dislike buttons-->
-                         <form id="tinder_id" method='POST'>
-                             {% csrf_token %}
-                            <div class="tinder--buttons">
-                                <button id="nope1" class="btn btn-outline-danger btn-rounded">
-                                    <img src="{% static 'images/dislike.png' %}" alt="Remove">
-                                </button>
-
-                                <button id="love1" class="btn btn-outline-success btn-rounded">
-                                    <img src="{% static 'images/like.png' %}">
-                                </button>
-                            </div>
-                         </form>
+                           <form class="tinder-form" method='POST'>
+    {% csrf_token %}
+    <div class="tinder--buttons">
+        <button class="btn btn-outline-danger btn-rounded nope-btn">
+            <img src="{% static 'images/dislike.png' %}" alt="Remove">
+        </button>
+        <button class="btn btn-outline-success btn-rounded like-btn">
+            <img src="{% static 'images/like.png' %}">
+        </button>
+    </div>
+</form>
 
 
 

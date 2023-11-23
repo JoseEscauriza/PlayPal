@@ -39,9 +39,6 @@ $(document).ready(function () {
                     // Optionally handle 'like' action, if needed
                     // For example, display a message or update UI
                 }
-
-                // Reload the swiping view after removing the card or recording a "like" action
-                window.location.href = $("#swipingUrl").data("url");
             },
             error: function (error) {
                 // Handle error if needed
@@ -51,7 +48,7 @@ $(document).ready(function () {
     }
 
     // Click event for "nope" button
-    $("#nope1").on("click", function (event) {
+    $(".nope-btn").on("click", function (event) {
         // Prevent the default form submission behavior
         event.preventDefault();
         console.log("Nope button clicked");
@@ -60,11 +57,11 @@ $(document).ready(function () {
     });
 
     // Click event for "like" button
-    $("#love1").on("click", function (event) {
+    $(".like-btn").on("click", function (event) {
         // Prevent the default form submission behavior
         event.preventDefault();
 
-        console.log("Love button clicked");
+        console.log("Like button clicked");
         handleAction($(this), 'like');
     });
 });
