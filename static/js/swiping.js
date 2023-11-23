@@ -1,45 +1,43 @@
-$(document).ready(function () {
-    // Function to get CSRF cookie value
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
+// The idea was when pressed like button go to record_action view, saved to DB and don't reload the page
+// when pressed nope button go to record_action view, saved to DB as disliked and remove the card
+//(or reload the page, in swiping views just add check if card is in disliked then don't display it )
+// Problems:  record_action is not being accessed and and not working at all:)
 
+$(document).ready(function () {
     // Function to handle both "nope" and "like" actions
     function handleAction(button, action) {
         // Get the user ID from the card (replace 'user-id' with the actual identifier in your HTML)
         var userId = button.closest(".card").data("user-id");
 
         // Get the dynamic URL
-        var dynamicUrl = "{% url 'record_action' %}";
+        var dynamicUrl = $("#recordAction").data("url");
+
+        // Get the CSRF token directly from the csrfmiddlewaretoken input field
+        var csrfToken = $("input[name=csrfmiddlewaretoken]").val();
 
         // Send an AJAX request to record the action
         $.ajax({
             type: "POST",
-            url: dynamicUrl, // Replace with the actual URL to handle the action
+            url: dynamicUrl,
             data: {
                 'user_id': userId,
                 'action': action,
-                'csrfmiddlewaretoken': getCookie('csrftoken')  // Include CSRF token here
+                'csrfmiddlewaretoken': csrfToken
             },
             success: function (data) {
                 // Handle success if needed
                 console.log("User action recorded successfully");
+
                 // Remove the card from the DOM for "nope" action
                 if (action === 'nope') {
                     button.closest(".card").remove();
+                } else if (action === 'like') {
+                    // Optionally handle 'like' action, if needed
+                    // For example, display a message or update UI
                 }
+
+                // Reload the swiping view after removing the card or recording a "like" action
+                window.location.href = $("#swipingUrl").data("url");
             },
             error: function (error) {
                 // Handle error if needed
@@ -49,12 +47,20 @@ $(document).ready(function () {
     }
 
     // Click event for "nope" button
-    $("#nope1").on("click", function () {
+    $("#nope1").on("click", function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+        console.log("Nope button clicked");
+
         handleAction($(this), 'nope');
     });
 
     // Click event for "like" button
-    $("#love1").on("click", function () {
+    $("#love1").on("click", function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        console.log("Love button clicked");
         handleAction($(this), 'like');
     });
 });

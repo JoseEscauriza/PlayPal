@@ -196,7 +196,8 @@ def other_user_profile(request, user_uuid):
 
 
 def record_action(request):
-    if request.method == 'POST' and request.is_ajax():
+
+    if request.method == 'POST' and request.headers.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         user_id = request.POST.get('user_id')
         action = request.POST.get('action')
 

@@ -14,6 +14,9 @@
 
 {% block content %}
 
+<div id="recordAction" data-url="{% url 'record_action' %}"></div>
+<div id="swipingUrl" data-url="{% url 'swiping' %}"></div>
+
 <div class="wrapper">
     <div class="d-md-flex align-items-md-center">
         <div class="h3">Find a PlayPal</div>
@@ -245,7 +248,8 @@
                                 {% endwith %}
 
                                 <!-- Like / Dislike buttons-->
-
+                         <form id="tinder_id" method='POST'>
+                             {% csrf_token %}
                             <div class="tinder--buttons">
                                 <button id="nope1" class="btn btn-outline-danger btn-rounded">
                                     <img src="{% static 'images/dislike.png' %}" alt="Remove">
@@ -255,6 +259,7 @@
                                     <img src="{% static 'images/like.png' %}">
                                 </button>
                             </div>
+                         </form>
 
 
 
