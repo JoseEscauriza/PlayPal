@@ -89,3 +89,13 @@ $(document).ready(function () {
         $('#' + this.id + '-value').text(this.value);
     });
 });
+
+
+$(document).ready(function () {
+    // Your existing code here...
+
+    // Initialize the modal with options
+    $('#Disliked_users').modal({
+        // your options here...
+    });
+});

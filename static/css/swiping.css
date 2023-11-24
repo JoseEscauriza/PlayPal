@@ -441,4 +441,13 @@ hr {
     /* Add any other styling you need for your slider values */
 }
 
+.btn-light-danger {
+    background-color: rgba(255, 0, 0, 0.75); /* Use RGBA color to set opacity */
+    color: #fff; /* Set text color to white or any contrasting color */
+    border-color: rgba(255, 0, 0, 0.5); /* Set border color to match background color */
+}
 
+.btn-light-danger:hover {
+    background-color: rgba(255, 0, 0, 0.7); /* Adjust hover opacity if needed */
+    border-color: rgba(255, 0, 0, 0.7);
+}
