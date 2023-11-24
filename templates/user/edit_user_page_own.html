@@ -63,10 +63,15 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
-                                <label for="first_name_form" class="form-label col-sm-3">First Name</label>
-                                <input type="text" class="form-control col-sm-9" placeholder="first name" id="first_name">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="first_name" class="form-label">First Name</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Your first name..." id="first_name" value="{{user.first_name}}">
+                                </div>
                             </div>
+                            
                             {% comment %} <div class="form-control">
                                 {{form.first_name}}
                             </div> {% endcomment %}
