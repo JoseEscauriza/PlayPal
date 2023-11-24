@@ -11,6 +11,8 @@
 <section style="background-color: #eee;" class="text-xxs">
 
     <div class="container py-5">
+        <form method="POST" action='{% url "edit_own_profile" %}' enctype="multipart/form-data">
+            {% csrf_token %}
         <div class="row">
             <div class="col-lg-4">
                 <div class="card mb-4">
@@ -22,8 +24,8 @@
                         <h5 class="my-3">{{ first_name|capfirst|default:'Your' }} {{ last_name|capfirst|default:'name' }}</h5>
                         <p class="text-muted mb-4"> {{ location }}</p>
                         <div class="d-flex justify-content-center mb-2">
-                            <a href='{% url "edit_own_profile" %}'> 
-                            <button type="button" class="btn btn-primary">Edit profile</button>
+                            <a href='{% url "own_profile" %}'> 
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </a>
                             <button type="button" class="btn btn-outline-primary ms-1">Change Avatar</button>
                         </div>
@@ -61,12 +63,13 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">First Name</p>
+                            <div class="col">
+                                <label for="first_name_form" class="form-label col-sm-3">First Name</label>
+                                <input type="text" class="form-control col-sm-9" placeholder="first name" id="first_name">
                             </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ first_name|capfirst|default:'Your first name' }}</p>
-                            </div>
+                            {% comment %} <div class="form-control">
+                                {{form.first_name}}
+                            </div> {% endcomment %}
                         </div>
                         <hr class="my-2">
                         <div class="row">
@@ -74,7 +77,9 @@
                                 <p class="mb-0">Last Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ last_name|capfirst|default:'Your last name' }}</p>
+                                <div class="form-control">
+                                {{form.last_name}}
+                                </div>
                             </div>
                         </div>
                         <hr class="my-2">
@@ -83,7 +88,9 @@
                                 <p class="mb-0">Email</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ email|default:'Your email' }}</p>
+                                <div class="form-control">
+                                {{form.email}}
+                                </div>
                             </div>
                         </div>
                         <hr class="my-2">
@@ -92,7 +99,9 @@
                                 <p class="mb-0">City</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ location|default:'Your city' }} </p>
+                                <div class="form-control">
+                                {{form.location}}
+                                </div>
                             </div>
                         </div>
                         <hr class="my-2">
@@ -101,7 +110,9 @@
                                 <p class="mb-0">Marital status</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ marital_status|default:'Your status' }} </p>
+                                <div class="form-control custom-select">
+                                {{form.marital_status}}
+                                </div>
                             </div>
                         </div>
                         <hr class="my-2">
@@ -110,7 +121,9 @@
                                 <p class="mb-0">Gender</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ gender|default:'Your gender' }} </p>
+                                <div class="form-control custom-select">
+                                {{form.gender}}
+                                </div>
                             </div>
                         </div>
 
@@ -120,12 +133,14 @@
                                 <p class="mb-0">Bio</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ bio|default:'Enter your bio here' }} </p>
-
+                                <div class="form-control">
+                                {{form.bio}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 {% for child in children_data %}
 
@@ -194,16 +209,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex ml-3 mb-3">
+                        <button type="button" class="btn btn-success">Add New Child</button>
+                    </div>
                 </div>
-
-
                 {% endfor %}
-
-
             </div>
 
 
         </div>
+    </form>
 
     </div>
 </section>

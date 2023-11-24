@@ -52,3 +52,23 @@ class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(CustomAuthenticationForm, self).__init__(*args, **kwargs)
         del self.fields['username']
+
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        exclude = (
+            "uuid",
+            "verified_status",
+            "liked_users",
+            "disliked_users",
+            "username",
+            "password",
+            "is_staff",
+            "is_active",
+            "date_joined"
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateForm, self).__init__(*args, **kwargs)

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import Http404
 from .models import CustomUser
-from .forms import CustomAuthenticationForm
+from .forms import CustomAuthenticationForm, UserUpdateForm
 import uuid
 
 def login_view(request):
@@ -129,3 +129,39 @@ def other_user_profile(request, user_uuid):
     
     except ValueError:
         raise Http404("Invalid UUID format.")
+    
+
+
+
+
+@login_required(login_url="login")
+def edit_user_profile_own(request):
+    children_data = []
+
+    user = request.user
+    form = UserUpdateForm(instance=user)
+
+    if request.method== "POST":
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
+
+    # Loop through the children
+    for child in user.child_set.all():
+        child_data = {
+            "first_name": child.first_name,
+            "gender": child.gender_id.gender_name,
+            "age": (date.today() - child.birthdate).days // 365,
+            "bio": child.bio,
+            "avatar": child.avatar.url if child.avatar else None,
+            "interests": ', '.join([interest.interest_name for interest in child.interest_id.all()]),
+            "child_images": [picture.picture.url for picture in child.pictures.all()],
+        }
+
+        children_data.append(child_data)
+
+
+
+    context = {
+        "children_data": children_data,
+        "form": form
+    }
+    return render(request, "user/edit_user_page_own.html", context)
