@@ -10,14 +10,17 @@
 $(document).ready(function () {
     // Function to handle both "nope" and "like" actions
     function handleAction(button, action) {
-        // Get the user ID from the card (replace 'user-id' with the actual identifier in your HTML)
+        // Get the user ID
         var userId = button.closest(".card").data("user-id");
 
         // Get the dynamic URL
         var dynamicUrl = $("#recordAction").data("url");
 
-        // Get the CSRF token directly from the csrfmiddlewaretoken input field
+        // Get the CSRF token
         var csrfToken = $("input[name=csrfmiddlewaretoken]").val();
+
+        // Use the dynamicImageUrl variable
+        var newImageSource = dynamicImageUrl;
 
         // Send an AJAX request to record the action
         $.ajax({
@@ -35,10 +38,18 @@ $(document).ready(function () {
                 // Remove the card from the DOM for "nope" action
                 if (action === 'nope') {
                     button.closest(".card").remove();
-                } else if (action === 'like') {
+                }
+
+
+                else if (action === 'like') {
                     // Optionally handle 'like' action, if needed
                     // For example, display a message or update UI
+
+                    // Change the image source after a successful 'like' action
+                    button.closest(".card").find('.card-img-top').attr('src', newImageSource);
                 }
+
+
             },
             error: function (error) {
                 // Handle error if needed
@@ -65,3 +76,4 @@ $(document).ready(function () {
         handleAction($(this), 'like');
     });
 });
+

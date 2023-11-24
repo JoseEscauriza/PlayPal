@@ -221,6 +221,10 @@ def record_action(request):
     else:
         return JsonResponse({'message': 'Invalid request'})
 
+# TODO: swiping html, add check if in liked than card_image_top to liked.png
+# TODO: js to show numbers when picking age in filter bar.
+# TODO: how to mark liked cards with a symbol or pictire in card ?
+# TODO: Maybe we need to add simple:list of liked and disliked users (so you could remove the disliked, once changed your mind or disliked acccidentely)
 # TODO:user_profile_own edit profile, change profile picture functs
 # TODO: make default smth for pages when user must be logged-in, otherwise /profile page fails
 
