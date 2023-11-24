@@ -221,6 +221,7 @@ def record_action(request):
     else:
         return JsonResponse({'message': 'Invalid request'})
 
+
 # TODO: swiping html, add check if in liked than card_image_top to liked.png
 # TODO: js to show numbers when picking age in filter bar.
 # TODO: how to mark liked cards with a symbol or pictire in card ?

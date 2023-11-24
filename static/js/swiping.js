@@ -77,3 +77,15 @@ $(document).ready(function () {
     });
 });
 
+
+
+
+// slider-script.js
+
+$(document).ready(function () {
+    // Use jQuery to handle the input change event for each slider
+    $('.multi-range').on('input', function () {
+        // Update the corresponding slider value element with the current value
+        $('#' + this.id + '-value').text(this.value);
+    });
+});

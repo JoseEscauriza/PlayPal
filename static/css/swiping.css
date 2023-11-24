@@ -431,3 +431,14 @@ hr {
 .text-xxs {
   font-size: 0.9rem; /* Adjust the font size as needed */
 }
+
+/* Separate CSS file for styling */
+.slider-value {
+    text-align: center;
+    font-size: 12px;
+    margin-top: -20px;
+    opacity: 0.6;
+    /* Add any other styling you need for your slider values */
+}
+
+

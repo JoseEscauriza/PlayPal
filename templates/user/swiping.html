@@ -20,6 +20,7 @@
 <!-- Dynamic var for js changing liked card-->
 <script>
     var dynamicImageUrl = '{% static 'images/card_bg/liked.png' %}';
+
 </script>
 
 
@@ -48,34 +49,42 @@
 
                     <!-- Parent's minimum age -->
                     <div class="bs-multi-range">
-                        <label for="parent-min-age-range" class="form-label h7-style">Parent's minimum age</label>
+                        <label for="parent-min-age-range" class="form-label h7-style">Parent's minimum age: <span
+                                class="slider-value" id="parent-min-age-value">18</span></label>
                         <br>
                         <input id="parent-min-age" name="parent-min-age" class="multi-range" type="range" min="18"
-                               max="70">
+                               max="70" value="18">
+
                     </div>
 
                     <!-- Parent's maximum age -->
                     <div class="bs-multi-range">
-                        <label for="parent-max-age-range" class="form-label h7-style">Parent's maximum age</label>
+                        <label for="parent-max-age-range" class="form-label h7-style">Parent's maximum age: <span
+                                class="slider-value" id="parent-max-age-value">18</span></label>
                         <br>
                         <input id="parent-max-age" name="parent-max-age" class="multi-range" type="range" min="18"
-                               max="70">
+                               max="70" value="18">
+
                     </div>
 
                     <!-- Child's minimum age -->
                     <div class="bs-multi-range">
-                        <label for="children-min-age-range" class="form-label h7-style">Child's minimum age</label>
+                        <label for="children-min-age-range" class="form-label h7-style">Child's minimum age: <span
+                                class="slider-value" id="child-min-age-value">1</span>
+                        </label>
                         <br>
-                        <input id="child-min-age" name="child-min-age" class="multi-range" type="range" min="1"
-                               max="10">
+                        <input id="child-min-age" name="child-min-age" class="multi-range" type="range" min="1" max="10"
+                               value="1">
                     </div>
 
                     <!-- Child's maximum age -->
                     <div class="bs-multi-range">
-                        <label for="children-max-age-range" class="form-label h7-style">Child's maximum age</label>
+                        <label for="children-max-age-range" class="form-label h7-style">Child's maximum age: <span
+                                class="slider-value" id="child-max-age-value">1</span>
+                        </label>
                         <br>
-                        <input id="child-max-age" name="child-max-age" class="multi-range" type="range" min="1"
-                               max="10">
+                        <input id="child-max-age" name="child-max-age" class="multi-range" type="range" min="1" max="10"
+                               value="1">
                     </div>
 
                     <!-- Interests -->
@@ -177,7 +186,7 @@
                     <!-- User Card -->
                     <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
                         <div class="card shadow" data-user-id="{{ user.uuid }}"><img class="card-img-top"
-                                                      src="{% static 'images/card_bg/basic_blue_card.png' %}">
+                                                                                     src="{% static 'images/card_bg/basic_blue_card.png' %}">
 
                             <div class="bg-light">
                                 <div class="card-body">
@@ -253,18 +262,17 @@
                                 </div>
                                 {% endwith %}
 
-                           <form class="tinder-form" method='POST'>
-    {% csrf_token %}
-    <div class="tinder--buttons">
-        <button class="btn btn-outline-danger btn-rounded nope-btn">
-            <img src="{% static 'images/dislike.png' %}" alt="Remove">
-        </button>
-        <button class="btn btn-outline-success btn-rounded like-btn">
-            <img src="{% static 'images/like.png' %}">
-        </button>
-    </div>
-</form>
-
+                                <form class="tinder-form" method='POST'>
+                                    {% csrf_token %}
+                                    <div class="tinder--buttons">
+                                        <button class="btn btn-outline-danger btn-rounded nope-btn">
+                                            <img src="{% static 'images/dislike.png' %}" alt="Remove">
+                                        </button>
+                                        <button class="btn btn-outline-success btn-rounded like-btn">
+                                            <img src="{% static 'images/like.png' %}">
+                                        </button>
+                                    </div>
+                                </form>
 
 
                             </div>
