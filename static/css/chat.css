@@ -185,6 +185,12 @@
   align-self: flex-start;
 }
 
+.chat-message-container .chatMessage--system {
+  background: black;
+  color: white;
+  align-self: center;
+}
+
 /* Styles for the chat-input (child of chat-message-container) */
 .chat-message-container .chat-input {
   display: flex;

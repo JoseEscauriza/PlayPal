@@ -1,4 +1,13 @@
 {% extends "base.html" %} 
+{% load static %}
+
+{% block stylesheet %}
+{{block.super}}
+<link rel="stylesheet" type="text/css" href="{% static 'uikit/styles/uikit.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/chat.css' %}" />
+{% endblock stylesheet %}
+
+
 
 {% block content %}
 <main class="messagePage my-xl">
@@ -11,7 +20,7 @@
     <div class="chat-message-container" id="chat-message-container">
       {% for chat_message in chat_messages %}
       <div
-        class="chatMessage{% if chat_message.sender == user %} chatMessage--right{% else %} chatMessage--left{% endif %}">
+        class="chatMessage{% if chat_message.sender == user %} chatMessage--right{% elif chat_message.sender == other_user %} chatMessage--left{% else %} chatMessage--system {% endif %}">
         {{ chat_message.content|safe }}
       </div>
       {% endfor %}
