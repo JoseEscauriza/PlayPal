@@ -10,7 +10,7 @@ from django.http import JsonResponse
 
 from .models import CustomUser, Interest, Child
 from .forms import CustomAuthenticationForm
-from .utils import calculate_birthdate_from_age
+from .utils import calculate_birthdate_from_age, check_mutual_like
 
 
 def login_view(request):
@@ -90,6 +90,20 @@ def user_profile_own(request):
 
 @login_required
 def user_swiping(request):
+    """" View responsible for user cards
+
+        For testing purposes, if you want to remove user from liked/disliked
+        use: make dev-shell
+
+            from apps.user.models import CustomUser
+            current_user = CustomUser.objects.get(email='YOUR LOGGED IN USER EMAIL')
+
+        remove the users from lists
+            current_user.disliked_users.clear()
+            or
+            current_user.liked_users.clear()
+
+    """
     # Fetch all interests
     interest_list = Interest.objects.all()
 
@@ -227,6 +241,10 @@ def record_action(request):
         # Record the action based on the provided action parameter
         if action == 'like':
             request.user.liked_users.add(liked_user)
+
+            # Check for mutual like and send a message using the utility function
+            check_mutual_like(request.user, liked_user)
+
         elif action == 'nope':
             request.user.disliked_users.add(liked_user)
 
@@ -234,6 +252,5 @@ def record_action(request):
     else:
         return JsonResponse({'message': 'Invalid request'})
 
+
 # TODO: check if mutually liked and sent msg
-# TODO: do i need to remove like, for liked user?
-# TODO: add view and button Return Removed Users
