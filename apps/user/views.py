@@ -234,7 +234,6 @@ def record_action(request):
     else:
         return JsonResponse({'message': 'Invalid request'})
 
-
-# TODO: swiping html, add check if in liked than card_image_top to liked.png
-# TODO: Maybe we need to add simple: list of liked and disliked users (so you could remove the disliked, once changed your mind or disliked acccidentely)
+# TODO: check if mutually liked and sent msg
+# TODO: do i need to remove like, for liked user?
 # TODO: add view and button Return Removed Users
