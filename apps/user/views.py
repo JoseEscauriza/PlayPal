@@ -114,6 +114,9 @@ def user_swiping(request):
         disliked_users = request.user.disliked_users.all()
         filtered_users = filtered_users.exclude(uuid__in=disliked_users)
 
+        # Liked user list (using for liked card view)
+        liked_users = request.user.liked_users.all()
+
         # Filter by matching child
         matching_users = [
             {
@@ -134,7 +137,8 @@ def user_swiping(request):
 
         context = {
             "matching_users": matching_users,
-            "interestlist": interest_list
+            "interestlist": interest_list,
+            "liked_users": liked_users
         }
         return render(request, "user/swiping.html", context)
 
@@ -147,6 +151,9 @@ def user_swiping(request):
         disliked_users = request.user.disliked_users.all()
         filtered_users = matching_users.exclude(uuid__in=disliked_users)
 
+        # Liked user list (using for liked card view)
+        liked_users = request.user.liked_users.all()
+
         # Prepare the context with matching users and their first child (if any) and interest for filters
         context = {
             "matching_users": [
@@ -156,7 +163,9 @@ def user_swiping(request):
                 }
                 for user in filtered_users
             ],
-            "interestlist": interest_list
+            "interestlist": interest_list,
+
+            "liked_users": liked_users
         }
         return render(request, "user/swiping.html", context)
 
