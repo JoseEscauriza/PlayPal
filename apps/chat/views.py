@@ -24,7 +24,6 @@ def inbox(request):
     return render(request, 'chats/inbox.html', context)
 
 
-
 @login_required(login_url="login")
 def private_chat_view(request, pk):
     user = request.user

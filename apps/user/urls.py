@@ -7,6 +7,8 @@ urlpatterns = [
     path('login/success/', views.logged_view, name='logged_view'),
     path('logout/', views.user_logout, name='logout'),
     path('profile/', views.user_profile_own, name='own_profile'),
-    path('register/', views.UserRegister.as_view(), name='user_registration')
+    path('register/', views.UserRegister.as_view(), name='user_registration'),
     path('user-profile/<uuid:user_uuid>/', views.other_user_profile, name='other_user_profile'),
+    path('swiping/', views.user_swiping, name='swiping'),
+    path('swiping/record_action/', views.record_action, name='record_action'),
 ]
