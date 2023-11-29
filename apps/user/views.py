@@ -156,6 +156,9 @@ def user_swiping(request):
         disliked_users = request.user.disliked_users.all()
         filtered_users = filtered_users.exclude(uuid__in=disliked_users)
 
+        # Exclude the current user
+        filtered_users = filtered_users.exclude(uuid=request.user.uuid)
+
         # Liked user list (using for liked card view)
         liked_users = request.user.liked_users.all()
 
@@ -192,6 +195,9 @@ def user_swiping(request):
         # Exclude users who are in the current user's disliked_users
         disliked_users = request.user.disliked_users.all()
         filtered_users = matching_users.exclude(uuid__in=disliked_users)
+
+        # Exclude the current user
+        filtered_users = filtered_users.exclude(uuid=request.user.uuid)
 
         # Liked user list (using for liked card view)
         liked_users = request.user.liked_users.all()
@@ -283,3 +289,4 @@ def record_action(request):
 
 
 # TODO: check if mutually liked and sent msg
+# TODO: Connect pictures to cards
