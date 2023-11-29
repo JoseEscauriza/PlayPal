@@ -6,6 +6,7 @@ base-install:
 
 dev-install:
 	pip install -r requirements/dev.txt
+	sudo apt install redis-server
 
 prod-install:
 	pip install -r requirements/prod.txt

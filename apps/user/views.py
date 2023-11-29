@@ -1,7 +1,12 @@
-import uuid
 from typing import Optional
-from datetime import date
+from datetime import date, datetime, timedelta
+import uuid
 
+from .models import CustomUser
+from .forms import CustomAuthenticationForm, CustomUserCreationForm
+
+from django import forms
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -12,7 +17,17 @@ from .models import CustomUser, Interest, Child
 from .forms import CustomAuthenticationForm
 from .utils import calculate_birthdate_from_age, check_mutual_like
 
+from django.http.response import HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+# FOR CLASS BASED VIEWS
+from django.views.generic import CreateView, TemplateView
+
+
+@user_passes_test(lambda u: not u.is_authenticated, login_url='logged_view')
 def login_view(request):
     error_message = None
     form = CustomAuthenticationForm()
@@ -86,6 +101,19 @@ def user_profile_own(request):
         "children_data": children_data
     }
     return render(request, "user/user_page_own.html", context)
+
+
+class UserRegister(UserPassesTestMixin, CreateView, SuccessMessageMixin):
+    template_name = 'user/registration.html'
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    success_message = "Your profile was created successfully"
+
+    def test_func(self):
+        return not self.request.user.is_authenticated
+
+    def handle_no_permission(self) -> HttpResponseRedirect:
+        return HttpResponseRedirect(reverse_lazy('own_profile'))
 
 
 @login_required
@@ -188,11 +216,12 @@ def user_swiping(request):
 def other_user_profile(request, user_uuid):
     children_data = []
 
-    try:
+    try:  
         user = CustomUser.objects.filter(uuid=user_uuid).first()
-
+        
         if user is None:
             raise Http404("User not found.")
+    
 
         # Loop through the children
         for child in user.child_set.all():
