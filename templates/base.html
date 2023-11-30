@@ -36,15 +36,19 @@
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">Home</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'own_profile' %}">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'swiping' %}">Find a PlayPal</a>
             </li>
-            {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'inbox'%}">Inbox</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_registration'%}">Register now!</a>
             </li>
             {% endif %}
         </ul>
