@@ -42,6 +42,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'swiping' %}">Find a PlayPal</a>
             </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'inbox'%}">Inbox</a>
+            </li>
+            {% endif %}
         </ul>
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
