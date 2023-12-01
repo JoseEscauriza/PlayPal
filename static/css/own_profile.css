@@ -6,11 +6,11 @@
     margin: 10px; /* Add margin for spacing between cards */
 }
 .card-img-top {
-    max-height: 65px; /* Adjust the maximum height of the image */
-    max-width: px; /* Adjust the maximum width of the image */
+    max-height: px; /* Adjust the maximum height of the image */
+    max-width: 75px; /* Adjust the maximum width of the image */
     object-fit: cover; /* Maintain aspect ratio while covering the space */
 }
 
 .text-xxs {
-  font-size: 0.9rem; /* Adjust the font size as needed */
+  font-size: 0.90rem; /* Adjust the font size as needed */
 }

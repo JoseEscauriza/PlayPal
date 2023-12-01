@@ -10,4 +10,6 @@ urlpatterns = [
     path('edit-profile/', views.edit_user_profile_own, name='edit_own_profile'),
     path('register/', views.UserRegister.as_view(), name='user_registration'),
     path('user-profile/<uuid:user_uuid>/', views.other_user_profile, name='other_user_profile'),
+    path('swiping/', views.user_swiping, name='swiping'),
+    path('swiping/record_action/', views.record_action, name='record_action'),
 ]

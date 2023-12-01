@@ -1,5 +1,6 @@
 import uuid
 from typing import List
+from datetime import date
 
 from django.db import models
 from django.core.validators import URLValidator
@@ -101,12 +102,14 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
         primary_key=True, default=uuid.uuid4, editable=False)
     username = None
     email = models.EmailField(unique=True)
-    gender = models.ForeignKey(Gender, on_delete=models.CASCADE, null=True, blank=True)
+    gender = models.ForeignKey(
+        Gender, on_delete=models.CASCADE, null=True, blank=True)
     verified_status = models.BooleanField(default=False)
     bio = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=50, null=True, blank=True)
     birthdate = models.DateField(null=True, blank=True)
-    marital_status = models.ForeignKey(MaritalStatus, on_delete=models.CASCADE, null=True, blank=True)
+    marital_status = models.ForeignKey(
+        MaritalStatus, on_delete=models.CASCADE, null=True, blank=True)
     avatar = models.ImageField(
         upload_to="avatars/", null=True, blank=True)
     blocked_users=models.ManyToManyField("self", symmetrical=False, related_name="blocked_by", blank=True)
@@ -128,7 +131,8 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS: List[str] = []  # TODO: think thoroughly what we actually-required when creating a user
+    # TODO: think thoroughly what we actually-required when creating a user
+    REQUIRED_FIELDS: List[str] = []
 
     def __str__(self) -> str:
         return self.email
@@ -136,6 +140,14 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     def has_perm(self, perm, obj=None) -> bool:
         """ Does the user have a specific permission? """
         return True
+
+    def calculate_age(self):
+        if self.birthdate:
+            today = date.today()
+            age = today.year - self.birthdate.year - \
+                ((today.month, today.day) < (self.birthdate.month, self.birthdate.day))
+            return age
+        return None
 
 
 class UserPhoto(models.Model):
@@ -159,7 +171,7 @@ class Child(TimeRegistryBaseModel):
     parent_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30, default="Kiddo")
     birthdate = models.DateField()
-    gender_id = models.OneToOneField(
+    gender_id = models.ForeignKey(
         "Gender", on_delete=models.CASCADE, related_name="child_gender")
     bio = models.TextField()
     interest_id = models.ManyToManyField(

@@ -1,15 +1,15 @@
 (function ($) {
     "use strict";
 
- 
-    
-    
+
+
+
     // Initiate the wowjs
     new WOW().init();
 
 
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
@@ -54,6 +54,20 @@
         }
     });
 
-    
+
 })(jQuery);
+
+$('#parent-age').mdbRange({
+  value: {
+    min: 1,
+    max: 10
+  },
+  single: {
+    active: true,
+    multi: {
+      active: true,
+      rangeLength: 2
+    },
+  }
+});
 

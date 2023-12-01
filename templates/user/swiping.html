@@ -1,0 +1,285 @@
+{% extends "base.html" %} {% load static %}
+
+{% block title %} Swiping {% endblock title %}
+
+{% block stylesheet %} {{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/swiping.css' %}"/>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
+      integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
+      integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous"/>
+
+{% endblock stylesheet %}
+
+{% block content %}
+
+<div id="recordAction" data-url="{% url 'record_action' %}"></div>
+<div id="swipingUrl" data-url="{% url 'swiping' %}"></div>
+
+<!-- Dynamic var for js changing liked card-->
+<script>
+    var dynamicImageUrl = '{% static 'images/card_bg/liked.png' %}';
+</script>
+
+
+<div class="wrapper">
+    <div class="d-md-flex align-items-md-center">
+        <div class="h3">Find a PlayPal</div>
+    </div>
+
+    <div class="content py-md-0 py-3">
+        <section id="sidebar">
+            <div class="py-3">
+                <h5 class="font-weight-bold">Filter by</h5>
+                <h6 class="font-weight-bold">Age</h6>
+
+
+                <form class="combined-form" method="POST" action="{% url 'swiping' %}">
+                    {% csrf_token %}
+
+                    <!-- Parent's minimum age -->
+                    <div class="bs-multi-range">
+                        <label for="parent-min-age-range" class="form-label h7-style">Parent's minimum age: <span
+                                class="slider-value" id="parent-min-age-value">18</span></label>
+                        <br>
+                        <input id="parent-min-age" name="parent-min-age" class="multi-range" type="range" min="18"
+                               max="70" value="18">
+                    </div>
+
+                    <!-- Parent's maximum age -->
+                    <div class="bs-multi-range">
+                        <label for="parent-max-age-range" class="form-label h7-style">Parent's maximum age: <span
+                                class="slider-value" id="parent-max-age-value">18</span></label>
+                        <br>
+                        <input id="parent-max-age" name="parent-max-age" class="multi-range" type="range" min="18"
+                               max="70" value="18">
+                    </div>
+
+                    <!-- Child's minimum age -->
+                    <div class="bs-multi-range">
+                        <label for="children-min-age-range" class="form-label h7-style">Child's minimum age: <span
+                                class="slider-value" id="child-min-age-value">1</span>
+                        </label>
+                        <br>
+                        <input id="child-min-age" name="child-min-age" class="multi-range" type="range" min="1" max="10"
+                               value="1">
+                    </div>
+
+                    <!-- Child's maximum age -->
+                    <div class="bs-multi-range">
+                        <label for="children-max-age-range" class="form-label h7-style">Child's maximum age: <span
+                                class="slider-value" id="child-max-age-value">1</span>
+                        </label>
+                        <br>
+                        <input id="child-max-age" name="child-max-age" class="multi-range" type="range" min="1" max="10"
+                               value="1">
+                    </div>
+
+                    <!-- Interests -->
+                    <h6 class="font-weight-bold mt-2">Popular interests</h6>
+                    <div class="my-2 pb-2">
+                        {% for interest in interestlist|slice:':5' %}
+                        <div class="form-inline d-flex align-items-center py-2">
+                            <label class="tick">{{interest.interest_name}}<input type="checkbox" name="interests[]"
+                                                                                 value="{{interest.interest_name}}">
+                                <span class="check"></span></label>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Rating -->
+                    <h6 class="font-weight-bold">Parent Rating</h6>
+                    <!-- Rating option 1 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <input type="checkbox" name="rating[]" value="5">
+                            <span class="check"></span>
+                        </label>
+                    </div>
+
+                    <!-- Rating option 2 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <input type="checkbox" name="rating[]" value="4">
+                            <span class="check"></span>
+                        </label>
+                    </div>
+
+                    <!-- Rating option 3 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <input type="checkbox" name="rating[]" value="3">
+                            <span class="check"></span>
+                        </label>
+                    </div>
+
+                    <!-- Rating option 4 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="fas fa-star"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <input type="checkbox" name="rating[]" value="2">
+                            <span class="check"></span>
+                        </label>
+                    </div>
+
+                    <!-- Rating option 5 -->
+                    <div class="form-inline d-flex align-items-center py-2">
+                        <label class="tick">
+                            <span class="fas fa-star"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <span class="far fa-star px-1 text-muted"></span>
+                            <input type="checkbox" name="rating[]" value="1">
+                            <span class="check"></span>
+                        </label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn mt-3">Find Matches</button>
+                </form>
+        </section>
+
+        <!-- User Profiles Section -->
+        <section id="products">
+            <div class="container py-3">
+                <div class="row">
+
+                    {% for user_info in matching_users %}
+                    {% with user=user_info.user %}
+
+
+                    <!-- User Card -->
+                    <div class="col-lg-4 col-md-6 col-sm-12 offset-md-0 offset-sm-1">
+                        <div class="card shadow" data-user-id="{{ user.uuid }}">
+
+                            {% if user in liked_users %}
+                                <img class="card-img-top" src="{% static 'images/card_bg/liked.png' %}">
+                            {% else %}
+                                <img class="card-img-top" src="{% static 'images/card_bg/basic_blue_card.png' %}">
+                            {% endif %}
+
+                            <div class="bg-light">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mt-2">
+                                        <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp{% endif %}"
+                                             class="float-left rounded-circle avatar">
+                                        <h6 class="font-weight-bold pt-1 ">{{user.first_name}}</h6>
+                                        <!-- Location -->
+
+                                        <div class="d-flex align-items-center ml-2 ">
+                                            <img src="{% static 'images/icons8-location-48.png' %}"
+                                                 class="float-left rounded-circle location">
+                                            <div class="font-weight-bold pt-1 h8-style ">{{user.location}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="font-weight-bold pt-1 h9-style text-muted ">About me</div>
+                                    <div class="text-muted description">{{user.bio}}</div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="d-flex align-items-center">
+                                    <div class="font-weight-bold pt-1 h9-style ">My Children</div>
+                                    <img src="{% static 'images/children_pic.png' %}" class="ml-3 children" alt="Children Picture">
+                                </div>
+
+                                {% with child=user_info.matching_children %}
+
+                                <div class="font-weight-bold pt-1 h7-style ">{{child.first_name|default:'Kiddo'}}</div>
+                                <div class="text-muted description">{{child.bio|default:'This is bio'}}
+                                </div>
+
+                                <div>
+                                    {% for interest in child.interests %}
+                                    <span class="badge bg-primary">{{ interest }}</span>
+
+                                    {% endfor %}
+                                </div>
+
+                                <hr class="hr hr-blurry"/>
+
+                                <!-- Child Picture -->
+                                <div class="">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="font-weight-bold pt-1 h9-style ">Pictures</div>
+                                        <a href="#" class="btn text-sm btn-link text-muted ">Show all</a>
+                                    </div>
+                                    <div class="row px-3 pb-3">
+                                        <div class="col-lg-6 col-6 mb-2 pr-lg-1">
+                                            <img src="https://images.unsplash.com/photo-1469594292607-7bd90f8d3ba4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-lg-6 col-6 mb-2 pl-lg-1">
+                                            <img src="https://images.unsplash.com/photo-1493571716545-b559a19edd14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-lg-6 col-6 pr-lg-1 mb-2">
+                                            <img src="https://images.unsplash.com/photo-1453791052107-5c843da62d97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-lg-6 col-6 pl-lg-1">
+                                            <img src="https://images.unsplash.com/photo-1475724017904-b712052c192a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                 alt="" class="img-fluid rounded shadow-sm">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% endwith %}
+
+                                <form class="tinder-form" method='POST'>
+                                    {% csrf_token %}
+                                    <div class="tinder--buttons">
+                                        <button class="btn btn-outline-danger btn-rounded nope-btn">
+                                            <img src="{% static 'images/dislike.png' %}" alt="Remove">
+                                        </button>
+                                        <button class="btn btn-outline-success btn-rounded like-btn">
+                                            <img src="{% static 'images/like.png' %}">
+                                        </button>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endwith %}
+                    {% endfor %}
+
+                </div>
+            </div>
+    </div>
+    </section>
+</div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static 'js/swiping.js' %}"></script>
+{% endblock javascript %}
