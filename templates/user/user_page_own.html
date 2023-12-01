@@ -13,6 +13,7 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-4">
+                <div class="sticky-top" style="top: 30px">
                 <div class="card mb-4">
                     <div class="card-body text-center">
                         <!-- if avatar is return it gets it, when not it shows predefined image src -->
@@ -20,7 +21,10 @@
                              alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
 
                         <h5 class="my-3">{{ first_name|capfirst|default:'Your' }} {{ last_name|capfirst|default:'name' }}</h5>
-                        <p class="text-muted mb-4"> {{ location }}</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fa-solid fa-location-dot pr-1"></i>
+                            <p class="text-muted mb-4 pl-1"> {{ location }}</p>
+                        </div>
                         <div class="d-flex justify-content-center mb-2">
                             <a href='{% url "edit_own_profile" %}'> 
                             <button type="button" class="btn btn-primary">Edit profile</button>
@@ -34,26 +38,41 @@
                 <div class="card mb-4 mb-lg-0">
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush rounded-3">
+                            {% if user.website %}
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                 <i class="fas fa-globe fa-lg text-warning"></i>
-                                <p class="mb-0">Some info/tags here</p>
+                                <p class="mb-0">
+                                    <a href="{{ user.website }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">{{ user.website|slice:"40" }}</a>
+                                </p>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                                <p class="mb-0">Some info/tags here</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                <p class="mb-0">Some info/tags here</p>
-                            </li>
+                            {% endif %}
+                            {% if user.instagram %}
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                 <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                <p class="mb-0">Some info/tags here</p>
+                                <a href="{{ user.instagram }}" target="_blank" class="text-decoration-none" rel="noopener noreferrer">{{ user.instagram|slice:"40" }}</a>
                             </li>
-
-                        </ul>
+                            {% endif %}
+                            {% if user.github %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                                <a href="{{ user.github }}" target="_blank" class="text-decoration-none" rel="noopener noreferrer">{{ user.github|slice:"40" }}</a>
+                            </li>
+                            {% endif %}
+                            {% if user.twitter %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                                <a href="{{ user.twitter }}" target="_blank" class="text-decoration-none" rel="noopener noreferrer">{{ user.twitter|slice:"40" }}</a>
+                            </li>
+                            {% endif %}
+                            {% if not user.website and not user.instagram and not user.github and not user.twitter %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <p class="mb-0">Pretty empty here! Edit your profile to include links to your social media accounts!</p>
+                            </li>
+                            {% endif %}
+                        </ul>                        
                     </div>
                 </div>
+            </div>
 
                 <!-- My profile data section -->
             </div>
@@ -61,6 +80,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
+                            <h4 class="text-center mb-4">Profile Info</h4>
                             <div class="col-sm-3">
                                 <p class="mb-0">First Name</p>
                             </div>
@@ -120,7 +140,7 @@
                                 <p class="mb-0">Bio</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ bio|default:'Enter your bio here' }} </p>
+                                <p class="text-muted mb-0">{{ bio|default:'Your bio' }} </p>
 
                             </div>
                         </div>
@@ -132,12 +152,15 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
-                            <h4 class="text-center">My children</h4>
-                            <div class="col-sm-3">
-                                <h5 class="mb-0"> {{ child.first_name|default:'Kiddo' }}</h5>
-                            </div>
+                            {% if forloop.counter == 1%}
+                            <h4 class="text-center mb-4">My children</h4>
+                            {% endif %}
 
+                            <div class="col-sm-3">
+                                <h5 class="mb-0"> {{ child.first_name|default:'Kiddo'|capfirst }}</h5>
+                            </div>
                         </div>
+
                         <hr class="my-2">
                         <div class="row"> 
                             <div class="col-sm-3">
@@ -179,20 +202,15 @@
                         <!-- Child pictures-->
 
                         <div class="container">
-                            <div class="row">
+                            <div class="row justify-content-evenly">
                                 {% for image in child.child_images %}
-                                <div class="col-md-3 ">
-                                    <div class="card card-square">
-                                        <img src="{{ image }}" class="card-img-top rounded"
-                                             alt="{{ child.first_ame }} img.">
-                                        <div class="card-body">
-                                            <!-- Any additional information related to the image -->
-                                        </div>
-                                    </div>
+                                <div class="col-md-3">
+                                    <img src="{{ image }}" class="card-img-top img-fluid rounded" alt="{{ child.first_name }} img.">
                                 </div>
                                 {% endfor %}
                             </div>
                         </div>
+                        
                     </div>
                 </div>
 

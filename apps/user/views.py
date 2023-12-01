@@ -2,8 +2,8 @@ from typing import Optional
 from datetime import date, datetime, timedelta
 import uuid
 
-from .models import CustomUser
-from .forms import CustomAuthenticationForm, CustomUserCreationForm
+from .models import CustomUser, Child, Interest, InterestCategory
+from .forms import CustomAuthenticationForm, CustomUserCreationForm, ChildUpdateForm
 
 from django import forms
 from django.urls import reverse_lazy
@@ -83,6 +83,7 @@ def user_profile_own(request):
         }
 
         children_data.append(child_data)
+
 
     context = {
         "email": user.email,
@@ -164,32 +165,43 @@ def other_user_profile(request, user_uuid):
 
 @login_required(login_url="login")
 def edit_user_profile_own(request):
-    children_data = []
 
     user = request.user
     form = UserUpdateForm(instance=user)
+    ChildUpdateFormSet = forms.modelformset_factory(Child, form=ChildUpdateForm, extra=1)
+    child_formset = ChildUpdateFormSet(queryset=user.child_set.all())
 
-    if request.method== "POST":
+
+    interest_dict = {}
+    categories = InterestCategory.objects.all()
+
+    for category in categories:
+        interest_dict[category]=Interest.objects.filter(category_id=category.id)
+
+
+    if request.method == "POST":
         form = UserUpdateForm(request.POST, request.FILES, instance=user)
+        child_formset = ChildUpdateFormSet(request.POST, request.FILES, queryset=user.child_set.all())
 
-    # Loop through the children
-    for child in user.child_set.all():
-        child_data = {
-            "first_name": child.first_name,
-            "gender": child.gender_id.gender_name,
-            "age": (date.today() - child.birthdate).days // 365,
-            "bio": child.bio,
-            "avatar": child.avatar.url if child.avatar else None,
-            "interests": ', '.join([interest.interest_name for interest in child.interest_id.all()]),
-            "child_images": [picture.picture.url for picture in child.pictures.all()],
-        }
-
-        children_data.append(child_data)
-
-
+        if form.is_valid():# and child_formset.is_valid():
+            form.save()
+            child_formset.save()
+            return redirect("own_profile")
+        else:
+            print(form.errors)
+            print(child_formset.errors)
+            return redirect("own_profile")
 
     context = {
-        "children_data": children_data,
-        "form": form
+        "form": form,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "location": user.location,
+        "verified_status": user.verified_status,
+        "child_formset": child_formset,
+        "interest_dict": interest_dict,
+        "avatar": user.avatar.url if user.avatar else None,
+
     }
+
     return render(request, "user/edit_user_page_own.html", context)

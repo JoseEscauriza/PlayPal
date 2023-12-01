@@ -15,6 +15,7 @@
             {% csrf_token %}
         <div class="row">
             <div class="col-lg-4">
+                <div class="sticky-top" style="top: 30px">
                 <div class="card mb-4">
                     <div class="card-body text-center">
                         <!-- if avatar is return it gets it, when not it shows predefined image src -->
@@ -22,11 +23,12 @@
                              alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
 
                         <h5 class="my-3">{{ first_name|capfirst|default:'Your' }} {{ last_name|capfirst|default:'name' }}</h5>
-                        <p class="text-muted mb-4"> {{ location }}</p>
+                        <div class="d-flex justify-content-center">
+                            <i class="fa-solid fa-location-dot pr-1"></i>
+                            <p class="text-muted mb-4 pl-1"> {{ location }}</p>
+                        </div>
                         <div class="d-flex justify-content-center mb-2">
-                            <a href='{% url "own_profile" %}'> 
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </a>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                             <button type="button" class="btn btn-outline-primary ms-1">Change Avatar</button>
                         </div>
                     </div>
@@ -38,167 +40,195 @@
                         <ul class="list-group list-group-flush rounded-3">
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                 <i class="fas fa-globe fa-lg text-warning"></i>
-                                <p class="mb-0">Some info/tags here</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                                <p class="mb-0">Some info/tags here</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                <p class="mb-0">Some info/tags here</p>
+                                <input type="text" class="form-control mr-1 ml-3" placeholder="Your website..." value="{{user.website}}" name="website">
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                 <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                <p class="mb-0">Some info/tags here</p>
+                                <input type="text" class="form-control mr-1 ml-3" placeholder="Your Instagram..." value="{{user.instagram}}" name="instagram">
                             </li>
-
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                                <input type="text" class="form-control mr-1 ml-3" placeholder="Your github..." value="{{user.github}}" name="github">
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                                <input type="text" class="form-control mr-1 ml-3" placeholder="Your twitter..." value="{{user.twitter}}" name="twitter">
+                            </li>
                         </ul>
                     </div>
                 </div>
-
+            </div>
                 <!-- My profile data section -->
             </div>
             <div class="col-lg-8">
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
-                            <div class="row">
+                            <h4 class="text-center mb-4">Profile Information</h4>
+
+                            <div class="form-group row">
                                 <div class="col-sm-3">
                                     <label for="first_name" class="form-label">First Name</label>
                                 </div>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Your first name..." id="first_name" value="{{user.first_name}}">
-                                </div>
-                            </div>
-                            
-                            {% comment %} <div class="form-control">
-                                {{form.first_name}}
-                            </div> {% endcomment %}
-                        </div>
-                        <hr class="my-2">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Last Name</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="form-control">
-                                {{form.last_name}}
+                                <div class="col-sm-9 pl-3">
+                                    <input type="text" class="form-control" placeholder="Your first name..." id="first_name" value="{{user.first_name}}" name="first_name">
                                 </div>
                             </div>
                         </div>
                         <hr class="my-2">
-                        <div class="row">
+                        <div class="form-group row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Email</p>
+                                <label for="last_name" class="form-label">Last Name</label>
                             </div>
                             <div class="col-sm-9">
-                                <div class="form-control">
-                                {{form.email}}
-                                </div>
+                                <input type="text" class="form-control" placeholder="Your last name..." id="last_name" value="{{user.last_name}}" name="last_name">
                             </div>
                         </div>
                         <hr class="my-2">
-                        <div class="row">
+                        <div class="form-group row">
                             <div class="col-sm-3">
-                                <p class="mb-0">City</p>
+                                <label for="email" class="form-label">Email</label>
                             </div>
                             <div class="col-sm-9">
-                                <div class="form-control">
-                                {{form.location}}
-                                </div>
+                                <input type="email" class="form-control" placeholder="Your email..." id="email" value="{{user.email}}" name="email">
                             </div>
                         </div>
                         <hr class="my-2">
-                        <div class="row">
+                        <div class="form-group row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Marital status</p>
+                                <label for="birthdate" class="form-label">Birthdate</label>
                             </div>
                             <div class="col-sm-9">
-                                <div class="form-control custom-select">
-                                {{form.marital_status}}
-                                </div>
+                                <input type="date" class="form-control" placeholder="Your birthdate..." id="birthdate" value="{{user.birthdate|date:'Y-m-d'}}" name="birthdate">
                             </div>
                         </div>
                         <hr class="my-2">
-                        <div class="row">
+                        <div class="form-group row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Gender</p>
+                                <label for="location" class="form-label">City</label>
                             </div>
                             <div class="col-sm-9">
-                                <div class="form-control custom-select">
-                                {{form.gender}}
-                                </div>
+                                <input type="text" class="form-control" placeholder="Your city..." id="location" value="{{user.location}}" name="location">
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="marital_status" class="form-label">Marital Status</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select class="form-select" placeholder="Your marital status..." id="marital_status" name="marital_status">
+                                    {% for ms in form.marital_status %}
+                                        <option value="{{ ms.value }}" {% if ms.value == user.marital_status.id %}selected{% endif %}>{{ ms }}</option>
+                                    {% endfor %}
+                                </select>                                
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="gender" class="form-label">Gender</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select type="text" class="form-select" placeholder="Your gender..." id="gender" name="gender">
+                                    {% for g in form.gender %}
+                                        <option value="{{ g.value }}" {% if g.value == user.gender.id %}selected{% endif %}>{{ g }}</option>
+                                    {% endfor %}                
+                                </select>
                             </div>
                         </div>
 
                         <hr class="my-2">
-                        <div class="row">
+                        <div class="form-group row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Bio</p>
+                                <label for="bio" class="form-label">Bio</label>
                             </div>
                             <div class="col-sm-9">
-                                <div class="form-control">
-                                {{form.bio}}
-                                </div>
+                                <textarea type="text" class="form-control" rows="5" placeholder="Your bio..." id="bio" name="bio">{{user.bio}}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
+            </form>
 
-
-                {% for child in children_data %}
-
+                {{ formset.management_form }}
+                {% for cf in child_formset%}
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
-                            <h4 class="text-center">My children</h4>
-                            <div class="col-sm-3">
-                                <h5 class="mb-0"> {{ child.first_name|default:'Kiddo' }}</h5>
-                            </div>
-
+                            {% if forloop.counter == 1 %}
+                            <h3 class="text-center mb-5">My children</h4>
+                            {% endif %}
                         </div>
-                        <hr class="my-2">
-                        <div class="row"> 
-                            <div class="col-sm-3">
-                                <p class="mb-0">Age</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ child.age|default:'Your child age' }}</p>
-                            </div>
-                        </div>
-                        <hr class="my-2">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Gender</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ child.gender|default:'Your child gender' }}</p>
-                            </div>
-                        </div>
-                        <hr class="my-2">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Interests</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ child.interests|default:'Your child interests' }}</p>
+                            <div class="form-group row">
+                                <div class="col-sm-3">
+                                    <label for="first_name_{{cf.prefix}}" class="form-label">First Name</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Your childs first name..." id="first_name_{{cf.prefix}}" value="{{ cf.instance.first_name }}" name="{{cf.prefix}}-first_name">
+                                </div>
                             </div>
                         </div>
                         <hr class="my-2">
-                        <div class="row">
+                        <div class="form-group row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Bio</p>
+                                <label for="birthdate_{{cf.prefix}}" class="form-label">Birthdate</label>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ child.bio|default:'Say something about your child' }}</p>
+                                <input type="date" class="form-control" placeholder="Your childs birthdate..." id="birthdate_{{cf.prefix}}" value="{{cf.instance.birthdate}}" name="{{cf.prefix}}-birthdate">
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="gender_{{cf.prefix}}" class="form-label">Gender</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select type="text" class="form-select" placeholder="Your childs gender..." id="gender_{{cf.prefix}}" name="{{cf.prefix}}-gender">
+                                    {% for gender in cf.gender_id %}
+                                        <option value="{{ gender.value }}" {% if gender.value == cf.instance.gender_id %}selected{% endif %}>{{ gender }}</option>
+                                    {% endfor %}                
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="interest_{{cf.prefix}}" class="form-label">Interests</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                {% for category, interests in interest_dict.items %}
+                                    <div class="col-sm-3">
+                                        <div class="mb-2 mt-2">
+                                            <strong>{{category}}</strong>
+                                        </div>
+                                        {% for interest in interests %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="interest_{{cf.prefix}}" {% if interest in cf.instance.interest_id.all %}checked{% endif %}>
+                                            <label class="form-check-label" for="interest_{{cf.prefix}}">{{interest}}</label>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="bio_{{cf.prefix}}" class="form-label">Bio</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <textarea type="text" class="form-control" rows="5" placeholder="Your childs bio..." id="bio_{{cf.prefix}}}" name="{{cf.prefix}}-bio">{{cf.instance.bio}}</textarea>
                             </div>
                         </div>
                         <hr class="my-2">
 
                         <!-- Child pictures-->
 
-                        <div class="container">
+                        {% comment %} <div class="container">
                             <div class="row">
                                 {% for image in child.child_images %}
                                 <div class="col-md-3 ">
@@ -212,20 +242,19 @@
                                 </div>
                                 {% endfor %}
                             </div>
+                        </div> {% endcomment %}
                         </div>
-                    </div>
-                    <div class="d-flex ml-3 mb-3">
-                        <button type="button" class="btn btn-success">Add New Child</button>
+                        </div>
+                        {% endfor %}
+                        {% comment %} <div class="d-flex ml-3 mb-3">
+                            <button type="button" class="btn btn-success">Add New Child</button>
+                        </div> {% endcomment %}
                     </div>
                 </div>
-                {% endfor %}
             </div>
-
-
         </div>
-    </form>
-
     </div>
+</div>
 </section>
 
 {% endblock content %}
