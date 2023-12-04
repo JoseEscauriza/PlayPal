@@ -24,6 +24,10 @@ class CustomUserAdmin(UserAdmin):
             "blocked_users",
             "liked_users",
             "disliked_users",
+            "instagram",
+            "website",
+            "github",
+            "twitter",
         )
         }
          ),

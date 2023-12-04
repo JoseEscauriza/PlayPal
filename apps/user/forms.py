@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext as _
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 
-from .models import CustomUser
+from .models import CustomUser, Child
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -52,3 +52,45 @@ class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(CustomAuthenticationForm, self).__init__(*args, **kwargs)
         del self.fields['username']
+
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = (
+            "email",
+            "first_name",
+            "last_name",
+            "bio",
+            "location",
+            "birthdate",
+            "marital_status",
+            "avatar",
+            "gender",
+            "marital_status",
+            "website",
+            "instagram",
+            "twitter",
+            "github"
+            )
+
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateForm, self).__init__(*args, **kwargs)
+
+
+class ChildUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Child
+        fields = (
+            "first_name",
+            "gender_id",
+            "birthdate",
+            "interest_id",
+            "bio",
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(ChildUpdateForm, self).__init__(*args, **kwargs)
+

@@ -2,8 +2,8 @@ from typing import Optional
 from datetime import date, datetime, timedelta
 import uuid
 
-from .models import CustomUser
-from .forms import CustomAuthenticationForm, CustomUserCreationForm
+from .models import CustomUser, Child, Interest, InterestCategory
+from .forms import CustomAuthenticationForm, CustomUserCreationForm, ChildUpdateForm
 
 from django import forms
 from django.urls import reverse_lazy
@@ -19,6 +19,11 @@ from .utils import calculate_birthdate_from_age, check_mutual_like
 
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from django.http import Http404
+from .models import CustomUser
+from .forms import CustomAuthenticationForm, UserUpdateForm
+import uuid
+
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -86,6 +91,7 @@ def user_profile_own(request):
         }
 
         children_data.append(child_data)
+
 
     context = {
         "email": user.email,
@@ -259,6 +265,53 @@ def other_user_profile(request, user_uuid):
 
     except ValueError:
         raise Http404("Invalid UUID format.")
+    
+
+
+
+
+@login_required(login_url="login")
+def edit_user_profile_own(request):
+
+    user = request.user
+    form = UserUpdateForm(instance=user)
+    ChildUpdateFormSet = forms.modelformset_factory(Child, form=ChildUpdateForm, extra=1)
+    child_formset = ChildUpdateFormSet(queryset=user.child_set.all())
+
+
+    interest_dict = {}
+    categories = InterestCategory.objects.all()
+
+    for category in categories:
+        interest_dict[category]=Interest.objects.filter(category_id=category.id)
+
+
+    if request.method == "POST":
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
+        child_formset = ChildUpdateFormSet(request.POST, request.FILES, queryset=user.child_set.all())
+
+        if form.is_valid():# and child_formset.is_valid():
+            form.save()
+            child_formset.save()
+            return redirect("own_profile")
+        else:
+            print(form.errors)
+            print(child_formset.errors)
+            return redirect("own_profile")
+
+    context = {
+        "form": form,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "location": user.location,
+        "verified_status": user.verified_status,
+        "child_formset": child_formset,
+        "interest_dict": interest_dict,
+        "avatar": user.avatar.url if user.avatar else None,
+
+    }
+
+    return render(request, "user/edit_user_page_own.html", context)
 
 
 def record_action(request):

@@ -3,6 +3,7 @@ from typing import List
 from datetime import date
 
 from django.db import models
+from django.core.validators import URLValidator
 from apps.core.models import TimeRegistryBaseModel
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
@@ -94,6 +95,8 @@ class UserPreference(models.Model):
         return f"ID: {self.id}"
 
 
+
+
 class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
     uuid = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
@@ -109,10 +112,14 @@ class CustomUser(AbstractUser, PermissionsMixin, TimeRegistryBaseModel):
         MaritalStatus, on_delete=models.CASCADE, null=True, blank=True)
     avatar = models.ImageField(
         upload_to="avatars/", null=True, blank=True)
-    blocked_users = models.ManyToManyField("self", symmetrical=False, related_name="blocked_by", blank=True)
-    liked_users = models.ManyToManyField("self", symmetrical=False, related_name="liked_by", blank=True)
-    disliked_users = models.ManyToManyField("self", symmetrical=False, related_name="disliked_by", blank=True)
-
+    blocked_users=models.ManyToManyField("self", symmetrical=False, related_name="blocked_by", blank=True)
+    liked_users=models.ManyToManyField("self", symmetrical=False, related_name="liked_by", blank=True)
+    disliked_users=models.ManyToManyField("self", symmetrical=False, related_name="disliked_by", blank=True)
+    instagram = models.URLField(blank=True, null=True, validators=[URLValidator()])
+    website = models.URLField(blank=True, null=True, validators=[URLValidator()])
+    twitter = models.URLField(blank=True, null=True, validators=[URLValidator()])
+    github = models.URLField(blank=True, null=True, validators=[URLValidator()])
+    
     #orm to retrieve all users (..) by current user:
     #logged_in_user = CustomUser.objects.get(id=request.user.uuid)
     #blocked_users = logged_in_user.blocked_users.all()
